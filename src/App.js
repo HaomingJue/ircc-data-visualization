@@ -8,7 +8,7 @@ import './App.css';
 
 function App() {
   return (
-    <HashRouter basename='/ircc-data-visualization'>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LoginPage/>} />
         <Route path="/login" element={<LoginPage/>} />
