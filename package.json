@@ -1,6 +1,6 @@
 {
-  "name": "ircc_data_visualization",
-  "homepage": "https://HaomingJue.github.io/ircc_data_visualization",
+  "name": "ircc-data-visualization",
+  "homepage": "https://haomingjue.github.io/ircc-data-visualization",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
