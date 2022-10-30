@@ -4,9 +4,11 @@ import { RegisterPage } from "./pages/register/register.page";
 import { HomePage } from "./pages/home/home.page";
 import './App.css';
 
+
+
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/ircc_data_visualization'>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
