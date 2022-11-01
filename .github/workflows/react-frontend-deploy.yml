@@ -10,8 +10,9 @@ jobs:
   build:
 
     runs-on: windows-latest
-    strategy:
-      node-version: [16.x]
+    matrix:
+      strategy:
+        node-version: [16.x]
 
     steps:
     - name: Checkout repository
