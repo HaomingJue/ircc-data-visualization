@@ -37,6 +37,7 @@ function NotFoundPage() {
             <Grid     direction="column"
                         display="flex"
                         justify="center">
+                <Box textAlign='center'>
                 <Button
                 href="/"
                 variant="contained"
@@ -44,6 +45,7 @@ function NotFoundPage() {
                 >
                 Back Home
                 </Button>
+                </Box>
             </Grid>
           </Box>
         </Box>
