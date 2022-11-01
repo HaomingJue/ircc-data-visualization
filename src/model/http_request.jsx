@@ -17,6 +17,7 @@ const getLoginToken = async () => {
 
 const handleRequest = async (request) => {
     let token = await getLoginToken();
+    console.log(token);
     let requestHeaders = {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -35,6 +36,8 @@ const handleRequest = async (request) => {
                 return await axios.put(url, request.object, {headers: requestHeaders});
             case 'Delete':
                 return await axios.delete(url, request.object, {headers: requestHeaders});
+            default:
+                return null
         }
     } 
     catch (error) {
