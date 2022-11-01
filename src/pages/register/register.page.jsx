@@ -89,7 +89,6 @@ function RegisterPage() {
               fullWidth
               name="address"
               label="address"
-              type="address"
               id="address"
             />
             <TextField
@@ -97,7 +96,6 @@ function RegisterPage() {
               fullWidth
               name="address_line2"
               label="address (line 2)"
-              type="address"
               id="address"
             />
             <Grid container columnSpacing={2}>
@@ -107,7 +105,6 @@ function RegisterPage() {
                         required
                         name="postal_code"
                         label="postal code"
-                        type="postal_code"
                         id="postal_code"
                     />
                 </Grid>
@@ -118,7 +115,6 @@ function RegisterPage() {
                         fullWidth
                         name="phone_number"
                         label="phone number"
-                        type="phone_number"
                         id="phone_number"
                     />
                 </Grid>

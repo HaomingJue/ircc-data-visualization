@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+//test import
+import { HttpRequest, handleRequest } from '../../model/http_request';
+import { User } from '../../model/user';
 
 function Copyright(props) {
   return (
@@ -26,9 +30,12 @@ function Copyright(props) {
   );
 }
 
+
 const theme = createTheme();
 
 export function LoginPage() {
+
+
   const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -36,6 +43,12 @@ export function LoginPage() {
         username: data.get('username'),
         password: data.get('password'),
         });
+        // test data
+        let testUser = new User(data.get('username'), data.get('password'), 'test_adress', 'test_role', 'test_token');
+        let request = new HttpRequest('Get', '/login', testUser);
+        let response = handleRequest(request);
+        console.log(request);
+        console.log(response);
   };
 
   return (
