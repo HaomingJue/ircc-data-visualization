@@ -10,8 +10,8 @@ jobs:
   build:
 
     runs-on: windows-latest
-    matrix:
-      strategy:
+    strategy:
+      matrix:
         node-version: [16.x]
 
     steps:
