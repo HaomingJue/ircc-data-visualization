@@ -16,20 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 //test import
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import { User } from '../../model/user';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
-        Error Makers
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-    </Typography>
-  );
-}
-
+import { Copyright } from '../../components/copyright';
 
 const theme = createTheme();
 
