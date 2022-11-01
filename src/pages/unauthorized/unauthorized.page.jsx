@@ -1,38 +1,57 @@
-import React from 'react';
-import { Box, Button, Container, Typography } from '@mui/material';
+import * as React from 'react';
+import { Copyright } from '../../components/copyright';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+  
+  
+  const theme = createTheme();
+
 
 function UnauthorizedPage() {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh'
-      }}
-    >
-      <Container maxWidth="md">
-        <Grid container spacing={2}>
-          <Grid xs={6}>
-            <Typography variant="h1">
-              404
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <img src="/404.png"></img>
+          <Typography component="h1" variant="h1">
+            403
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Typography variant="h6">
+            You are unauthorized to access the content.
             </Typography>
-            <Typography variant="h6">
-              The page you’re looking for doesn’t exist.
-            </Typography>
-            <Button variant="contained">Back Home</Button>
-          </Grid>
-          <Grid xs={6}>
-            <img
-              src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
-              alt=""
-              width={500} height={250}
-            />
-          </Grid>
-        </Grid>
+            <Grid     direction="column"
+                        display="flex"
+                        justify="center">
+                <Box textAlign='center'>
+                <Button
+                href="/"
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                >
+                Back Home
+                </Button>
+                </Box>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 2, mb: 4 }} />
       </Container>
-    </Box>
+    </ThemeProvider>
   );
 }
 
