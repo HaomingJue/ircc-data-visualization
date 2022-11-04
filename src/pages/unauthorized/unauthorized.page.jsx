@@ -16,7 +16,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function UnauthorizedPage() {
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -34,9 +33,6 @@ function UnauthorizedPage() {
           <Typography variant="h6">
             You are unauthorized to access the content.
             </Typography>
-            <Grid     direction="column"
-                        display="flex"
-                        justify="center">
                 <Box textAlign='center'>
                 <Button
                 href="/"
@@ -46,11 +42,9 @@ function UnauthorizedPage() {
                 Back Home
                 </Button>
                 </Box>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 2, mb: 4 }} />
-      </Container>
     </ThemeProvider>
   );
 }

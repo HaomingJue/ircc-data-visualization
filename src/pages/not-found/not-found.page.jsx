@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function NotFoundPage() {
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+
         <CssBaseline />
         <Box
           sx={{
@@ -34,9 +34,6 @@ function NotFoundPage() {
           <Typography variant="h6">
             You are in the wilderness of nowhere.
             </Typography>
-            <Grid     direction="column"
-                        display="flex"
-                        justify="center">
                 <Box textAlign='center'>
                 <Button
                 href="/"
@@ -46,11 +43,10 @@ function NotFoundPage() {
                 Back Home
                 </Button>
                 </Box>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 2, mb: 4 }} />
-      </Container>
+
     </ThemeProvider>
   );
 }
