@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Copyright } from '../../components/copyright';
+import { Copyright } from '../../components/Copyright';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -7,17 +7,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useTheme } from '@emotion/react';
 
-  
-  
-  const theme = createTheme();
+
 
 
 function NotFoundPage() {
+  const theme = useTheme();
+
   return (
     <ThemeProvider theme={theme}>
 
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,

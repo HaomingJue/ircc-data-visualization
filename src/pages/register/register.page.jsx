@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppRegistration } from '@mui/icons-material';
-import { Copyright } from '../../components/copyright';
+import { Copyright } from '../../components/Copyright';
 
 const theme = createTheme();
 

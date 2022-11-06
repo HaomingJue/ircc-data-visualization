@@ -16,12 +16,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 //test import
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import { User } from '../../model/user';
-import { Copyright } from '../../components/copyright';
+import { Copyright } from '../../components/Copyright';
 import { themeSettings } from '../../common/theme';
+import HomePage from '../home/home.page';
+import { Route, useNavigate } from 'react-router-dom';
+import { tokens } from '../../common/theme';
+
 
 const theme = createTheme();
 
 export function LoginPage() {
+
+
+  let navigate = useNavigate(); 
 
 
   const handleSubmit = (event) => {
@@ -39,6 +46,7 @@ export function LoginPage() {
         console.log(response);
         console.log(themeSettings("dark"));
 
+        navigate("/home")
   };
 
   return (
@@ -88,7 +96,7 @@ export function LoginPage() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#6DC96D', ':hover': {bgcolor:'green'}}}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
             >
               Sign In
             </Button>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Copyright } from '../../components/copyright';
+import { Copyright } from '../../components/Copyright';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
