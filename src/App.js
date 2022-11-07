@@ -6,6 +6,7 @@ import { UnauthorizedPage } from "./pages/unauthorized/unauthorized.page";
 import  HomePage from './pages/home/home.page';
 import { ColorModeContext, useMode } from './common/theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import UserGridPage from './pages/home/manage-user/manage-user';
 
 function App() {
 
@@ -19,8 +20,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginPage/>} />
             <Route path="/login" element={<LoginPage/>} />
-            <Route path="home" element={<HomePage/>} >
-              <Route path="calendar" element={<UnauthorizedPage/>} />
+            <Route path="/home" element={<HomePage/>} >
+              <Route path="manage-user" element={<UserGridPage/>} />
             </Route>
             <Route path="/register" element={<RegisterPage/>} />
             <Route path='/404' element={<NotFoundPage/>}/>

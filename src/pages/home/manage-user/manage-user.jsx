@@ -5,9 +5,9 @@ import { mockDataTeam } from "../../../mockData/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import Header from "../../components/Header";
+import Header from "../../../components/GridHeader";
 
-const UserGrid = () => {
+const UserGridPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -70,7 +70,7 @@ const UserGrid = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header title="Manage User" subtitle="Managing current users" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -106,4 +106,4 @@ const UserGrid = () => {
   );
 };
 
-export default UserGrid;
+export default UserGridPage;

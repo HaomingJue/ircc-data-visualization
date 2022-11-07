@@ -36,7 +36,7 @@ function NotFoundPage() {
             </Typography>
                 <Box textAlign='center'>
                 <Button
-                href="/"
+                href="/home"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 >
