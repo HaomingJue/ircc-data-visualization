@@ -22,12 +22,14 @@ import HomePage from '../home/home.page';
 import { Route, useNavigate } from 'react-router-dom';
 import { tokens } from '../../common/theme';
 import Topbar from '../../common/Topbar';
+import { useTheme } from '@emotion/react';
 
 
-const theme = createTheme();
+
 
 export function LoginPage() {
 
+  const theme = useTheme();
 
   let navigate = useNavigate(); 
 
