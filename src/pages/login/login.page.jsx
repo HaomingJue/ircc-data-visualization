@@ -21,6 +21,7 @@ import { themeSettings } from '../../common/theme';
 import HomePage from '../home/home.page';
 import { Route, useNavigate } from 'react-router-dom';
 import { tokens } from '../../common/theme';
+import Topbar from '../../common/Topbar';
 
 
 const theme = createTheme();
@@ -51,8 +52,9 @@ export function LoginPage() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Topbar showProfileButton={false} showLogoutButton={false}/>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+
         <Box
           sx={{
             marginTop: 8,

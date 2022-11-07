@@ -13,8 +13,9 @@ import { PersonalVideoOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 
-
-const Topbar = () => {
+const Topbar = ({showLightButton = true,
+                showProfileButton = true,
+                showLogoutButton = true}) => {
 
     const navigate = useNavigate();
 
@@ -29,17 +30,10 @@ const Topbar = () => {
     const colorMode = useContext(ColorModeContext);
     return (
         <Box display="flex" justifyContent="flex-end" padding={2}>
-            {/* Purchase Button */}
-            <Box
-                display="flex"
-                backgroundColor={colors.greenAccent[500]}
-                borderRadius="3px"
-            >
-                <Button>Get Premium</Button>
-            </Box>
 
             {/* Icon Bar */}
             <Box display="flex">
+                {showLightButton && 
                 <Box display="flex">
                     <IconButton onClick={colorMode.toggleColorMode}>
                         {theme.palette.mode === 'dark' ? (
@@ -47,16 +41,21 @@ const Topbar = () => {
                         ): <LightModeOutlinedIcon></LightModeOutlinedIcon>}
                     </IconButton>
                 </Box>
+                }
+                {showProfileButton && 
                 <Box display="flex"> 
                     <IconButton onClick={colorMode.toggleColorMode}>
                         <PersonOutlinedIcon/>
                     </IconButton>
                 </Box>
+                }
+                {showLogoutButton &&
                 <Box display="flex">
                     <IconButton onClick={handleLogout}>
                         <LogoutOutlinedIcon/>
                     </IconButton>
                 </Box>
+                }
             </Box>
         </Box>
     );

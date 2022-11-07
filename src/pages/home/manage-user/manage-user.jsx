@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../common/theme";
 import { mockDataTeam } from "../../../mockData/mockData";
@@ -33,36 +33,27 @@ const UserGridPage = () => {
     {
       field: "email",
       headerName: "Email",
+      editable: true,
       flex: 1,
     },
     {
       field: "accessLevel",
       headerName: "Access Level",
+      align: "left",
       flex: 1,
       renderCell: ({ row: { access } }) => {
         return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : access === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
-            </Typography>
-          </Box>
+          
+
+            <Box display="flex" justifyContent="spacing">
+              <Box display="flex" marginRight={2}>
+                <Button style={{backgroundColor:colors.greenAccent[600]}}>Update</Button>
+              </Box>
+              <Box display="flex" marginRight={2}>
+                <Button style={{backgroundColor:colors.redAccent[500]}}>Delete</Button>
+              </Box>
+            </Box>
+          
         );
       },
     },
@@ -74,6 +65,8 @@ const UserGridPage = () => {
       <Box
         m="40px 0 0 0"
         height="75vh"
+         min-height= "100vh"
+    box-sizing="border-box"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
