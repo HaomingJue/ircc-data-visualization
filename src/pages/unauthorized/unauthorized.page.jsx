@@ -7,15 +7,19 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Topbar from '../../common/Topbar';
+import { useTheme } from '@emotion/react';
 
   
   
-  const theme = createTheme();
+
 
 
 function UnauthorizedPage() {
+  const theme = useTheme();
   return (
     <ThemeProvider theme={theme}>
+        <Topbar showProfileButton={false} showLogoutButton={false}/>
         <CssBaseline />
         <Box
           sx={{

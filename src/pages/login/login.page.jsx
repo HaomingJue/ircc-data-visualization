@@ -29,7 +29,7 @@ import { useTheme } from '@emotion/react';
 
 export function LoginPage() {
 
-  const theme = useTheme();
+  const theme = createTheme();
 
   let navigate = useNavigate(); 
 

@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useTheme } from '@emotion/react';
+import Topbar from '../../common/Topbar';
 
 
 
@@ -17,7 +18,7 @@ function NotFoundPage() {
 
   return (
     <ThemeProvider theme={theme}>
-
+        <Topbar showProfileButton={false} showLogoutButton={false}/>
         <Box
           sx={{
             marginTop: 8,
