@@ -13,7 +13,7 @@ env:
 
 jobs:
   local-build-and-test:
-    runs-on: linux-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
