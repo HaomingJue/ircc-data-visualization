@@ -49,7 +49,7 @@ export function LoginPage() {
         console.log(response);
         console.log(themeSettings("dark"));
 
-        navigate("/home")
+        navigate("/home/dashboard")
   };
 
   return (

@@ -61,9 +61,25 @@ const ManageUserPage = () => {
 
   return (
     <Box m="20px">
-      <Header title="Manage User" subtitle="Managing current users" />
+
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Header title="Manage User" subtitle="Managing current users" />
+            <Button
+              sx={{
+                backgroundColor: colors.blueAccent[700],
+                color: colors.grey[100],
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+              }}
+            >
+              <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
+              Download Reports
+            </Button>
+        </Box>
+
       <Box
-        m="40px 0 0 0"
+        m="0px 0 0 0"
         height="72vh"
          min-height= "100vh"
     box-sizing="border-box"

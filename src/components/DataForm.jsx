@@ -1,13 +1,13 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { tokens } from "../../../common/theme";
-import { mockDataTeam } from "../../../mockData/mockData";
+import { tokens } from "../common/theme";
+import { mockDataTeam } from "../mockData/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import Header from "../../../components/GridHeader";
+import Header from "./GridHeader";
 
-const ManageDataPage = () => {
+const DataForm = ({autoHeight=false}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -60,28 +60,9 @@ const ManageDataPage = () => {
   ];
 
   return (
-    <Box m="20px">
 
-      <Box>
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Header title="Manage User" subtitle="Managing current users" />
-            <Button
-              sx={{
-                backgroundColor: colors.blueAccent[700],
-                color: colors.grey[100],
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-            >
-              <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
-              Download Reports
-            </Button>
-          </Box>
-
-        </Box>
       <Box
-        m="0 0 0 0"
+        m="40px 0 0 0"
         height="72vh"
          min-height= "100vh"
     box-sizing="border-box"
@@ -113,8 +94,7 @@ const ManageDataPage = () => {
       >
         <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
       </Box>
-    </Box>
   );
 };
 
-export default ManageDataPage;
+export default DataForm;

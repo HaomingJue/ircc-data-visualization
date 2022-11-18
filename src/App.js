@@ -15,6 +15,8 @@ import BarChartPage from './pages/home/bar-chart/bar-chart';
 import LineChartPage from './pages/home/line-chart/line-chart';
 import PieChartPage from './pages/home/pie-chart/pie-chrat.page';
 import GeographyChartPage from './pages/home/geography-chart/geography-chart';
+import DashboardPage from './pages/home/dashboard/dashboard';
+
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
             <Route path="/" element={<LoginPage/>} />
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/home" element={<HomePage/>} >
+              <Route path="dashboard" element={<DashboardPage/>}></Route>
               <Route path="manage-user" element={<UserGridPage/>} />
               <Route path="create-user" element={<CreateUserPage/>} />
               <Route path="manage-data" element={<ManageDataPage/>} />

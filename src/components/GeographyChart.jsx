@@ -39,13 +39,13 @@ const GeographyChart = ({ isDashboard = false }) => {
         },
       }}
       features={geoFeatures.features}
-      margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+      margin={isDashboard? { top: 0, right: 0, bottom: 0, left: 0 } : { top: 80, right: 0, bottom: 0, left: 0 }}
       domain={[0, 1000000]}
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
-      projectionScale={isDashboard ? 40 : 185}
-      projectionTranslation={isDashboard ? [0.49, 0.6] : [0.5, 0.5]}
+      projectionScale={isDashboard ? 40 : 250}
+      projectionTranslation={isDashboard ? [0.49, 0.6] : [0.45, 0.5]}
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor="#ffffff"

@@ -3,7 +3,6 @@ import { CssBaseline, useTheme } from "@mui/material";
 import { ColorModeContext, useMode } from "../../common/theme";
 import  Topbar  from "../../common/Topbar";
 import  Sidebar from "../../common/Sidebar";
-import { Dashboard } from "../../components/Dashboard";
 import { Link, Outlet } from "react-router-dom";
 import { LoginPage } from "../login/login.page";
 import { NotFoundPage } from "../not-found/not-found.page";
