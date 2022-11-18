@@ -1,10 +1,7 @@
 import  Topbar  from "../../common/Topbar";
 import  Sidebar from "../../common/Sidebar";
-import {  Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useState } from "react";
-
-
-
 
 const HomePage = () => {
         const [isSidebar, setIsSidebar] = useState(true);

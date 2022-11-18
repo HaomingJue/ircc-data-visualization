@@ -7,9 +7,6 @@ import {  ThemeProvider } from '@mui/material/styles';
 import { useTheme } from '@emotion/react';
 import Topbar from '../../common/Topbar';
 
-
-
-
 function NotFoundPage() {
   const theme = useTheme();
 

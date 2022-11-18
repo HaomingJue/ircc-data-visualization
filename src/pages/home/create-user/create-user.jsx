@@ -4,8 +4,6 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../../components/GridHeader";
 
-
-
 const CreateUserPage = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
