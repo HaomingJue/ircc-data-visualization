@@ -24,7 +24,7 @@ function NotFoundPage() {
             alignItems: 'center',
           }}
         >
-          <img src="/404.png" alt="no image available"></img>
+          <img src="/404.png" alt="unavailable"></img>
           <Typography component="h1" variant="h1">
             404
           </Typography>
