@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   irccdatavisualization:
-    image: irccreactregistrydev.azurecr.io
+    image: irccreactdev
     build:
       context: .
       dockerfile: ./Dockerfile
