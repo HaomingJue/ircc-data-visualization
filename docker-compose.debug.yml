@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   irccdatavisualization:
-    image: irccdatavisualization
+    image: irccreactdev
     build:
       context: .
       dockerfile: ./Dockerfile
