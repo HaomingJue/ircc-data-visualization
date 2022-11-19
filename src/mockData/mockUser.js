@@ -1,0 +1,21 @@
+var user = {
+    "user_id": "9f5718dc-9bfb-49eb-acf6-10900256c9e1",
+    "password": "123456",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "jiekunl",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-11-08T06:27:05.137948Z",
+    "full_name": "Jiekun Liu",
+    "user_gender": "male",
+    "user_birthdate": "2022-11-08T01:27:05.137948Z",
+    "user_address": "171 lees avenue",
+    "user_phone": "3431234568",
+    "user_icon": "/user-icons/elon-musk.png",
+    "groups": [],
+    "user_permissions": []
+}

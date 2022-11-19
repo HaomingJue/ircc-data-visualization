@@ -2,7 +2,6 @@ import * as React from 'react';
 // import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -18,11 +17,8 @@ import { HttpRequest, handleRequest } from '../../model/http_request';
 import { User } from '../../model/user';
 import { Copyright } from '../../components/Copyright';
 import { themeSettings } from '../../common/theme';
-import HomePage from '../home/home.page';
-import { Route, useNavigate } from 'react-router-dom';
-import { tokens } from '../../common/theme';
+import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
-import { useTheme } from '@emotion/react';
 
 
 

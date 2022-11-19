@@ -16,6 +16,7 @@ import LineChartPage from './pages/home/line-chart/line-chart';
 import PieChartPage from './pages/home/pie-chart/pie-chrat.page';
 import GeographyChartPage from './pages/home/geography-chart/geography-chart';
 import DashboardPage from './pages/home/dashboard/dashboard';
+import PremiumPage from './pages/home/premium-page/premium-page';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route path="manage-user" element={<UserGridPage/>} />
               <Route path="create-user" element={<CreateUserPage/>} />
               <Route path="manage-data" element={<ManageDataPage/>} />
+              <Route path="premium" element={<PremiumPage/>} />
               <Route path="data-form" element={<DataFormPage/>} />
               <Route path='faq' element={<FAQ/>} />
               <Route path='bar-chart' element={<BarChartPage/>} />

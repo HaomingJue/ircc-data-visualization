@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -11,10 +10,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppRegistration } from '@mui/icons-material';
 import { Copyright } from '../../components/Copyright';
+import { useTheme } from '@emotion/react';
 
-const theme = createTheme();
+
 
 function RegisterPage() {
+  const theme = useTheme();
   const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -27,7 +28,7 @@ function RegisterPage() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+
         <Box
           sx={{
             marginTop: 8,
