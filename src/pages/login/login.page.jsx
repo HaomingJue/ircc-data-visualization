@@ -11,21 +11,23 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {  ThemeProvider } from '@mui/material/styles';
 //test import
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import { User } from '../../model/user';
 import { Copyright } from '../../components/Copyright';
-import { themeSettings } from '../../common/theme';
+import { themeSettings, tokens } from '../../common/theme';
 import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
+import { useTheme } from '@emotion/react';
 
 
 
 
 export function LoginPage() {
 
-  const theme = createTheme();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   let navigate = useNavigate(); 
 
@@ -102,12 +104,12 @@ export function LoginPage() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" color={colors.primary[100]}>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href="/register" variant="body2" color={colors.primary[100]}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

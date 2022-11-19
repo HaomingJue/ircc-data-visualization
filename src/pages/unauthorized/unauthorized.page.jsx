@@ -27,7 +27,7 @@ function UnauthorizedPage() {
             alignItems: 'center',
           }}
         >
-          <img src="/404.png"></img>
+          <img src="/404.png" alt="no image available"></img>
           <Typography component="h1" variant="h1">
             403
           </Typography>
