@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  irccdatavisualization:
+    image: irccreactregistrydev.azurecr.io
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"

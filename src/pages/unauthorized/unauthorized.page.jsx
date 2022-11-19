@@ -8,11 +8,6 @@ import {  ThemeProvider } from '@mui/material/styles';
 import Topbar from '../../common/Topbar';
 import { useTheme } from '@emotion/react';
 
-  
-  
-
-
-
 function UnauthorizedPage() {
   const theme = useTheme();
   return (
