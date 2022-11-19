@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useState } from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -20,34 +20,33 @@ import { themeSettings, tokens } from '../../common/theme';
 import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
 import { useTheme } from '@emotion/react';
-
-
-
+import { useEffect } from 'react';
 
 export function LoginPage() {
-
+  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   let navigate = useNavigate(); 
-
+  // default check valid token
+  // useEffect(() => {
+  //   console.log(currentUser);
+  // }, []);
 
   const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-        username: data.get('username'),
-        password: data.get('password'),
-        });
-        // test data
-        let testUser = new User(data.get('username'), data.get('password'), 'test_adress', 'test_role', 'test_token');
-        let request = new HttpRequest('Get', '/login', testUser);
-        let response = handleRequest(request);
-        console.log(request);
+        let loginRequest = {};
+        loginRequest["username"] = data.get('username');
+        loginRequest["password"] = data.get('password');
+        let request = new HttpRequest('Post', '/login/', loginRequest);
+        let response = handleRequest(request).then((a) => {return a});
+        
         console.log(response);
-        console.log(themeSettings("dark"));
 
-        navigate("/home/dashboard")
+        // let response2 = handleRequest(new HttpRequest('Get', '/plan/update/*'));
+
+        // navigate("/home/dashboard")
   };
 
   return (

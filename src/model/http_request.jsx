@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-var BASE_URL = "http://127.0.0.1:8000"
+var BASE_URL = "https://irccdjangowebapp.azurewebsites.net"
 
 class HttpRequest {
 
@@ -11,31 +11,27 @@ class HttpRequest {
     }
 };
 
-const getLoginToken = async () => {
-    return "test token";
+const getLoginToken = (id) => {
+    return localStorage.getItem(id);
 }
 
 const handleRequest = async (request) => {
-    let token = await getLoginToken();
-    console.log(token);
+    let token = await getLoginToken("");
     let requestHeaders = {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': token && 'Token ' + token
     };
+    console.log("requestHeaders:", requestHeaders);
     try{
-        // let url = requestHeaders.url;
         let url = request.url;
-        // let url = "www.google.ca"
         switch(request.type) {
             case 'Get':
-                return await axios.get(url, {headers: requestHeaders});
+                return await axios({method: 'get', url, data: request.object});
             case 'Post':
-                return await axios.post(url, request.object, {headers: requestHeaders});
+                return await axios({method: 'post', url, data: request.object, headers: requestHeaders});
             case 'Put':
-                return await axios.put(url, request.object, {headers: requestHeaders});
+                return await axios({method: 'put', url, data: request.object, headers: requestHeaders});
             case 'Delete':
-                return await axios.delete(url, request.object, {headers: requestHeaders});
+                return await axios({method: 'delete', url, data: request.object, headers: requestHeaders});
             default:
                 return null
         }
