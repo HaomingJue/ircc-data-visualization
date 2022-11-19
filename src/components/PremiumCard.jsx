@@ -30,15 +30,15 @@ export default function PremiumCard(plan) {
                         species, ranging across all continents except Antarctica
                     </Typography>
                     </CardContent>
-                </CardActionArea>
-                <CardActions sx={{justifyContent:"center"}}>
-                    <Box display="flex" justifyContent="center" m="12px 0 12px 0">
-                        <Button type="submit" color="secondary" variant="contained">
-                            Create New User
-                        </Button>
-                    </Box>
+                    <CardActions sx={{justifyContent:"center"}}>
+                        <Box display="flex" justifyContent="center" m="12px 0 12px 0">
+                            <Button type="submit" color="secondary" variant="contained">
+                                Create New User
+                            </Button>
+                        </Box>
 
-                </CardActions>
+                    </CardActions>
+                </CardActionArea>
             </Card>
 
         </Box>
