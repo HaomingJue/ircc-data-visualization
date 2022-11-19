@@ -15,8 +15,8 @@ const getLoginToken = (id) => {
     return localStorage.getItem(id);
 }
 
-const handleRequest = async (request) => {
-    let token = await getLoginToken("");
+const handleRequest = (request) => {
+    let token = getLoginToken("");
     let requestHeaders = {
         'Authorization': token && 'Token ' + token
     };
@@ -25,13 +25,13 @@ const handleRequest = async (request) => {
         let url = request.url;
         switch(request.type) {
             case 'Get':
-                return await axios({method: 'get', url, data: request.object});
+                return axios({method: 'get', url, data: request.object});
             case 'Post':
-                return await axios({method: 'post', url, data: request.object, headers: requestHeaders});
+                return axios({method: 'post', url, data: request.object, headers: requestHeaders});
             case 'Put':
-                return await axios({method: 'put', url, data: request.object, headers: requestHeaders});
+                return axios({method: 'put', url, data: request.object, headers: requestHeaders});
             case 'Delete':
-                return await axios({method: 'delete', url, data: request.object, headers: requestHeaders});
+                return axios({method: 'delete', url, data: request.object, headers: requestHeaders});
             default:
                 return null
         }

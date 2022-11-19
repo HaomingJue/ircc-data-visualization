@@ -29,9 +29,18 @@ export function LoginPage() {
 
   let navigate = useNavigate(); 
   // default check valid token
-  // useEffect(() => {
-  //   console.log(currentUser);
-  // }, []);
+
+  const handleLogin = (result) => {
+    let status = result['status'];
+    let data = result['data'];
+    if (status >= 200 && status <= 299) {
+      let currentUser = new User(data);
+      console.log(currentUser);
+    } else {
+      // show modal;
+      alert("Login Error.");
+    }
+  } 
 
   const handleSubmit = (event) => {
         event.preventDefault();
@@ -40,11 +49,7 @@ export function LoginPage() {
         loginRequest["username"] = data.get('username');
         loginRequest["password"] = data.get('password');
         let request = new HttpRequest('Post', '/login/', loginRequest);
-        let response = handleRequest(request).then((a) => {return a});
-        
-        console.log(response);
-
-        // let response2 = handleRequest(new HttpRequest('Get', '/plan/update/*'));
+        handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
 
         // navigate("/home/dashboard")
   };
