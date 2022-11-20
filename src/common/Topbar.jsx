@@ -6,7 +6,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useNavigate } from "react-router-dom";
-import { clearLocal } from "../service/localstorage";
+import { clearLocal } from "../service/localStorage";
 
 
 const Topbar = ({showLightButton = true,

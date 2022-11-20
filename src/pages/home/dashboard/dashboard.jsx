@@ -6,9 +6,20 @@ import Header from "../../../components/GridHeader";
 import LineChart from "../../../components/LineChart";
 import GeographyChart from "../../../components/GeographyChart";
 import BarChart from "../../../components/BarChart";
-import { getLocal } from "../../../service/localstorage";
+import { getLocal } from "../../../service/localStorage";
+import { useEffect } from "react";
+import { checkLoginStatus } from "../../../service/checkLoginStatus";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
+  let navigate = useNavigate();
+
+  useEffect( () => {
+    if (!checkLoginStatus()) {
+      navigate("/login");
+    }
+  },[])
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

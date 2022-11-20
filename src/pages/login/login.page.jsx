@@ -20,7 +20,8 @@ import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
 import { useTheme } from '@emotion/react';
 import { useEffect } from 'react';
-import { getLocal, setLocal } from '../../service/localstorage';
+import {  setLocal } from '../../service/localStorage';
+import { checkLoginStatus } from '../../service/checkLoginStatus';
 
 export function LoginPage() {
   
@@ -31,9 +32,7 @@ export function LoginPage() {
   // default check valid token
 
   useEffect(() => {
-    let currentUser = getLocal('user');
-    console.log(currentUser);
-    if (currentUser?.token) {
+    if (checkLoginStatus()) {
       navigate("/home/dashboard");
     }
   }, []);
