@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getLocal } from '../service/localstorage';
+import { getLocal } from '../service/localStorage';
 
 var BASE_URL = "https://irccdjangowebapp.azurewebsites.net"
 
