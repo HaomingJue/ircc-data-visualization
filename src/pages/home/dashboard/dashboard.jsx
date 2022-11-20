@@ -6,11 +6,13 @@ import Header from "../../../components/GridHeader";
 import LineChart from "../../../components/LineChart";
 import GeographyChart from "../../../components/GeographyChart";
 import BarChart from "../../../components/BarChart";
-
+import { getLocal } from "../../../service/localstorage";
 
 const DashboardPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  let user = getLocal('user');
 
   return (
     <Box m="20px">
@@ -41,7 +43,6 @@ const DashboardPage = () => {
         gridAutoRows="140px"
         gap="20px"
       >
-
 
         {/* ROW 1 */}
         <Box

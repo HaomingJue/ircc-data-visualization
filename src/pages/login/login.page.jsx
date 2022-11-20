@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -21,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
 import { useTheme } from '@emotion/react';
 import { useEffect } from 'react';
+import { getLocal, setLocal } from '../../service/localstorage';
 
 export function LoginPage() {
   
@@ -30,12 +30,22 @@ export function LoginPage() {
   let navigate = useNavigate(); 
   // default check valid token
 
+  useEffect(() => {
+    let currentUser = getLocal('user');
+    console.log(currentUser);
+    if (currentUser?.token) {
+      navigate("/home/dashboard");
+    }
+  }, []);
+
   const handleLogin = (result) => {
     let status = result['status'];
     let data = result['data'];
     if (status >= 200 && status <= 299) {
       let currentUser = new User(data);
       console.log(currentUser);
+      setLocal('user', currentUser);
+      navigate("/home/dashboard");
     } else {
       // show modal;
       alert("Login Error.");
@@ -43,22 +53,19 @@ export function LoginPage() {
   } 
 
   const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        let loginRequest = {};
-        loginRequest["username"] = data.get('username');
-        loginRequest["password"] = data.get('password');
-        let request = new HttpRequest('Post', '/login/', loginRequest);
-        handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
-
-        // navigate("/home/dashboard")
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let loginRequest = {};
+    loginRequest["username"] = data.get('username');
+    loginRequest["password"] = data.get('password');
+    let request = new HttpRequest('Post', '/login/', loginRequest);
+    handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Topbar showProfileButton={false} showLogoutButton={false}/>
       <Container component="main" maxWidth="xs">
-
         <Box
           sx={{
             marginTop: 8,
