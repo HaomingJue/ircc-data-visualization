@@ -6,6 +6,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useNavigate } from "react-router-dom";
+import { clearLocal } from "../service/localstorage";
 
 
 const Topbar = ({showLightButton = true,
@@ -15,7 +16,7 @@ const Topbar = ({showLightButton = true,
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        /* To do: Implement logout service*/
+        clearLocal('user');
         navigate("/")
     }
 

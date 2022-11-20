@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -20,41 +19,53 @@ import { themeSettings, tokens } from '../../common/theme';
 import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
 import { useTheme } from '@emotion/react';
-
-
-
+import { useEffect } from 'react';
+import { getLocal, setLocal } from '../../service/localstorage';
 
 export function LoginPage() {
-
+  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   let navigate = useNavigate(); 
+  // default check valid token
 
+  useEffect(() => {
+    let currentUser = getLocal('user');
+    console.log(currentUser);
+    if (currentUser?.token) {
+      navigate("/home/dashboard");
+    }
+  }, []);
+
+  const handleLogin = (result) => {
+    let status = result['status'];
+    let data = result['data'];
+    if (status >= 200 && status <= 299) {
+      let currentUser = new User(data);
+      console.log(currentUser);
+      setLocal('user', currentUser);
+      navigate("/home/dashboard");
+    } else {
+      // show modal;
+      alert("Login Error.");
+    }
+  } 
 
   const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        username: data.get('username'),
-        password: data.get('password'),
-        });
-        // test data
-        let testUser = new User(data.get('username'), data.get('password'), 'test_adress', 'test_role', 'test_token');
-        let request = new HttpRequest('Get', '/login', testUser);
-        let response = handleRequest(request);
-        console.log(request);
-        console.log(response);
-        console.log(themeSettings("dark"));
-
-        navigate("/home/dashboard")
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let loginRequest = {};
+    loginRequest["username"] = data.get('username');
+    loginRequest["password"] = data.get('password');
+    let request = new HttpRequest('Post', '/login/', loginRequest);
+    handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Topbar showProfileButton={false} showLogoutButton={false}/>
       <Container component="main" maxWidth="xs">
-
         <Box
           sx={{
             marginTop: 8,
