@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../common/theme";
 import { mockTransactions } from "../../../mockData/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 import Header from "../../../components/GridHeader";
 import LineChart from "../../../components/LineChart";
 import GeographyChart from "../../../components/GeographyChart";
@@ -11,7 +11,10 @@ import { useEffect } from "react";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 
+
+
 const DashboardPage = () => {
+  
   let navigate = useNavigate();
 
   useEffect( () => {
@@ -33,6 +36,7 @@ const DashboardPage = () => {
 
         <Box>
           <Button
+           onClick={() => {navigate("/home/premium")}}
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
@@ -41,8 +45,8 @@ const DashboardPage = () => {
               padding: "10px 20px",
             }}
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
+            <AddCardOutlinedIcon sx={{ mr: "10px" }} />
+            Purchase Premium
           </Button>
         </Box>
       </Box>
@@ -52,6 +56,7 @@ const DashboardPage = () => {
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
+        borderBottom="20px"
         gap="20px"
       >
 
@@ -83,13 +88,6 @@ const DashboardPage = () => {
               >
                 $59,342.32
               </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
@@ -149,21 +147,55 @@ const DashboardPage = () => {
 
         {/* ROW 3 */}
         <Box
-          gridColumn="span 4"
-          gridRow="span 2"
+          gridColumn="span 8"
+          gridRow="span 6"
+          marginBottom="10px"
           backgroundColor={colors.primary[400]}
-          p="30px"
+          overflow="auto"
         >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
+            <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            borderBottom={`4px solid ${colors.primary[500]}`}
+            colors={colors.grey[100]}
+            p="15px"
           >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
+            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+              Recent Transactions
+            </Typography>
           </Box>
+          {mockTransactions.map((transaction, i) => (
+            <Box
+              key={`${transaction.txId}-${i}`}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              borderBottom={`4px solid ${colors.primary[500]}`}
+              p="15px"
+            >
+              <Box>
+                <Typography
+                  color={colors.greenAccent[500]}
+                  variant="h5"
+                  fontWeight="600"
+                >
+                  {transaction.txId}
+                </Typography>
+                <Typography color={colors.grey[100]}>
+                  {transaction.user}
+                </Typography>
+              </Box>
+              <Box color={colors.grey[100]}>{transaction.date}</Box>
+              <Box
+                backgroundColor={colors.greenAccent[500]}
+                p="5px 10px"
+                borderRadius="4px"
+              >
+                ${transaction.cost}
+              </Box>
+            </Box>
+          ))}
         </Box>
 
         <Box
@@ -186,7 +218,24 @@ const DashboardPage = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            Sales Quantity
+          </Typography>
+          <Box height="250px" mt="-20px">
+            <BarChart isDashboard={true} />
+          </Box>
+        </Box>
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
           padding="30px"
+          marginBottom="10px"
         >
           <Typography
             variant="h5"

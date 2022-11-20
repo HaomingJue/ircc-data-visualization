@@ -43,7 +43,10 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
 
   return (
-    <Box
+    <Box 
+      display={"flex"}
+      flex-flexDirection={"column"}
+      minHeight={"100%"}
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
