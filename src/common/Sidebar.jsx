@@ -47,18 +47,20 @@ const Sidebar = () => {
   //   }
   // }, [user])
   let user = getLocal('user');
-  var userIconImage = "/user-icons/" + user.icon
 
-  console.log( "/user-icons/elon-musk.png")
+  console.log( )
 
   const getUserName = () => {
     return user.username;
   }
 
+  // to be finished
   const getRole = () => {
-    if (user.is_staff) {
-      return "Admin"
-    }
+    return "Admin"
+  }
+
+  const getUserIconImage = () => {
+    return "/user-icons/" + user.icon
   }
 
 
@@ -123,7 +125,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`/user-icons/${user.icon}`}
+                  src={getUserIconImage()}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
