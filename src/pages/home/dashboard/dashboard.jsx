@@ -21,7 +21,7 @@ const DashboardPage = () => {
     if (!checkLoginStatus()) {
       navigate("/login");
     }
-  },[])
+  },[navigate])
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

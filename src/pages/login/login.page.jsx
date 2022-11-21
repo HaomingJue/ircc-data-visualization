@@ -15,7 +15,7 @@ import {  ThemeProvider } from '@mui/material/styles';
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import { User } from '../../model/user';
 import { Copyright } from '../../components/Copyright';
-import { themeSettings, tokens } from '../../common/theme';
+import { tokens } from '../../common/theme';
 import { useNavigate } from 'react-router-dom';
 import Topbar from '../../common/Topbar';
 import { useTheme } from '@emotion/react';
