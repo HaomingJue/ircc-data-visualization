@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button,  Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../common/theme";
 import { mockTransactions } from "../../../mockData/mockData";
 import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
@@ -6,7 +6,6 @@ import Header from "../../../components/GridHeader";
 import LineChart from "../../../components/LineChart";
 import GeographyChart from "../../../components/GeographyChart";
 import BarChart from "../../../components/BarChart";
-import { getLocal } from "../../../service/localStorage";
 import { useEffect } from "react";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +25,6 @@ const DashboardPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  let user = getLocal('user');
 
   return (
     <Box m="20px">
