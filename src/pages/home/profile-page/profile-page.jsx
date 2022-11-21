@@ -34,6 +34,8 @@ import { handleRequest, HttpRequest } from "../../../model/http_request";
 const ProgfilePage = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const [iconId, setIconId] = useState("icon-1");
     
     let navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -42,6 +44,8 @@ const ProgfilePage = () => {
         if (!checkLoginStatus()) {
             navigate("/login");
         }
+        let user = getLocal('user');
+        setIconId(user.icon);
     }, [navigate])
 
     const [gender, setGender] = useState("Male");
@@ -92,14 +96,17 @@ const ProgfilePage = () => {
         registerRequest["last_name"] = data.get('lastName');
         registerRequest["user_gender"] = data.get('gender');
         registerRequest["user_phone"] = data.get('phone');
-        //registerRequest["user_icon"] = data.get('icon');
+        registerRequest["user_icon"] = data.get('iconId');
         registerRequest["user_address"] = data.get('address');
         registerRequest["user_postcode"] = data.get('postcode');
 
-        console.log(data);
-        // let request = new HttpRequest('Post', `/login/update/${data.get('user_id')}`, registerRequest);
-        // handleRequest(request).then((a) => handleUpdate(a)).catch((err) => handleUpdate(err));
+        let request = new HttpRequest('Put', `/login/update/${data.get('userId')}`, registerRequest);
+        handleRequest(request).then((a) => handleUpdate(a)).catch((err) => handleUpdate(err));
     }
+
+    const handleIconChange = (e) => {
+        setIconId(e.target.value);
+    };
 
     return (
         <>
@@ -194,14 +201,66 @@ const ProgfilePage = () => {
             >
                 <DialogTitle>Your Personal Information</DialogTitle>
                 <DialogContent>
+                    <Box display="flex" justifyContent="center" >
+                        <img
+                        alt="profile-user"
+                        width="100px"
+                        height="100px"
+                        src={`/user-icons/${iconId}`}
+                        style={{ cursor: "pointer", borderRadius: "50%" }}
+                        />
+                    </Box>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <Grid container columnSpacing={2}>
+                            <Grid item xs={3}/>
+                            <Grid item xs={3}>
+                                <FormControl sx={{ justifyContent: 'center', marginTop: 2, minWidth: 120 }} required>
+                                    <InputLabel id="demo-simple-select-helper-label">Icon</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-helper-label"
+                                        id={iconId}
+                                        value={iconId}
+                                        label="IconId"
+                                        name="iconId"
+                                        onChange={handleIconChange}
+                                    >
+                                        <MenuItem value={'icon-1.png'}>icon-1</MenuItem>
+                                        <MenuItem value={'icon-2.png'}>icon-2</MenuItem>
+                                        <MenuItem value={'icon-3.png'}>icon-3</MenuItem>
+                                        <MenuItem value={'elon-musk.png'}>elon musk</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <FormControl sx={{ marginTop: 2, minWidth: 120 }} required>
+                                    <InputLabel id="gender">Gender</InputLabel>
+                                    <Select
+                                        id="demo-simple-select-helper"
+                                        value={gender}
+                                        label="Gender"
+                                        name="gender"
+                                        onChange={handleGenderChange}
+                                    >
+                                        <MenuItem value={'Male'}>Male</MenuItem>
+                                        <MenuItem value={'Female'}>Female</MenuItem>
+                                        <MenuItem value={'Anatomical'}>Anatomical</MenuItem>
+                                        <MenuItem value={'Cisgender'}>Cisgender</MenuItem>
+                                        <MenuItem value={'Transgender'}>Transgender</MenuItem>
+                                        <MenuItem value={'Cishet'}>Cishet</MenuItem>
+                                        <MenuItem value={'Non-binary'}>Non-binary</MenuItem>
+                                        <MenuItem value={'Genderqueer'}>Genderqueer</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={3}/>
+                        </Grid>
                         <TextField
                             type="hidden"
                             defaultValue={user?.userId}
-                            id="user_id"
+                            id="userId"
+                            name="userId"
                             fullWidth
                             variant="standard"
-                            disabled
                         />
                         <TextField
                             autoFocus
@@ -209,8 +268,9 @@ const ProgfilePage = () => {
                             margin="dense"
                             id="username"
                             label="Username"
+                            name="username"
                             fullWidth
-                            disabled
+                            InputProps={{readOnly: true}}
                             variant="standard"
                         />
                         <TextField
@@ -220,44 +280,21 @@ const ProgfilePage = () => {
                             margin="dense"
                             id="firstName"
                             label="First Name"
+                            name="firstName"
                             fullWidth
                             variant="standard"
                         />
-                        <Grid container columnSpacing={2}>
-                            <Grid item xs={8}>
-                            <TextField
-                                autoFocus
-                                defaultValue={user?.lastName}
-                                required
-                                margin="dense"
-                                id="lastName"
-                                label="Last Name"
-                                fullWidth
-                                variant="standard"
-                            />
-                            </Grid>
-                            <Grid item xs={4}>
-                            <FormControl sx={{ marginTop: 2, minWidth: 120 }} required>
-                                <InputLabel id="gender">Gender</InputLabel>
-                                <Select
-                                    id="demo-simple-select-helper"
-                                    value={gender}
-                                    label="Gender"
-                                    name="gender"
-                                    onChange={handleGenderChange}
-                                >
-                                    <MenuItem value={'Male'}>Male</MenuItem>
-                                    <MenuItem value={'Female'}>Female</MenuItem>
-                                    <MenuItem value={'Anatomical'}>Anatomical</MenuItem>
-                                    <MenuItem value={'Cisgender'}>Cisgender</MenuItem>
-                                    <MenuItem value={'Transgender'}>Transgender</MenuItem>
-                                    <MenuItem value={'Cishet'}>Cishet</MenuItem>
-                                    <MenuItem value={'Non-binary'}>Non-binary</MenuItem>
-                                    <MenuItem value={'Genderqueer'}>Genderqueer</MenuItem>
-                                </Select>
-                            </FormControl>
-                            </Grid>
-                        </Grid>
+                        <TextField
+                            autoFocus
+                            defaultValue={user?.lastName}
+                            required
+                            margin="dense"
+                            id="lastName"
+                            label="Last Name"
+                            name="lastName"
+                            fullWidth
+                            variant="standard"
+                        />
                         <TextField
                             autoFocus
                             defaultValue={dateFormat(user?.userBirthDay, 'yyyy/dd/MM')}
@@ -275,6 +312,7 @@ const ProgfilePage = () => {
                             required
                             id="phone"
                             label="Phone"
+                            name="phone"
                             fullWidth
                             variant="standard"
                         />
@@ -284,6 +322,7 @@ const ProgfilePage = () => {
                             margin="dense"
                             required
                             id="address"
+                            name="address"
                             label="Address"
                             fullWidth
                             variant="standard"
@@ -294,6 +333,7 @@ const ProgfilePage = () => {
                             margin="dense"
                             required
                             id="postcode"
+                            name="postcode"
                             label="Postcode"
                             fullWidth
                             variant="standard"

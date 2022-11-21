@@ -45,7 +45,6 @@ const Sidebar = () => {
   return (
     <Box 
       display={"flex"}
-      flex-flexDirection={"column"}
       minHeight={"100%"}
       sx={{
         "& .pro-sidebar-inner": {
