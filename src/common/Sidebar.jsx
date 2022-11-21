@@ -17,6 +17,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
+import { getLocal } from "../service/localStorage";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -37,6 +38,30 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+
+  // const [user, setUser] = useState();
+
+  // useEffect(() => {
+  //   if (checkLoginStatus()) {
+  //     setUser(getLocal("user"))
+  //   }
+  // }, [user])
+  let user = getLocal('user');
+  var userIconImage = "/user-icons/" + user.icon
+
+  console.log( "/user-icons/elon-musk.png")
+
+  const getUserName = () => {
+    return user.username;
+  }
+
+  const getRole = () => {
+    if (user.is_staff) {
+      return "Admin"
+    }
+  }
+
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -45,8 +70,6 @@ const Sidebar = () => {
   return (
     <Box 
       display={"flex"}
-      flex-flexDirection={"column"}
-      minHeight={"100%"}
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
@@ -100,7 +123,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src="/user-icons/elon-musk.png"
+                  src={`/user-icons/${user.icon}`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -111,10 +134,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "15px 0 10px 0" }}
                 >
-                  Elon Musk
+                  {getUserName()}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin
+                  {getRole()}
                 </Typography>
               </Box>
             </Box>
