@@ -35,7 +35,7 @@ export function LoginPage() {
     if (checkLoginStatus()) {
       navigate("/home/dashboard");
     }
-  }, []);
+  }, [navigate]);
 
   const handleLogin = (result) => {
     let status = result['status'];
