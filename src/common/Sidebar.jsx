@@ -18,6 +18,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
 import { getLocal } from "../service/localStorage";
+import dateFormat from 'dateformat';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -39,25 +40,26 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 const Sidebar = () => {
 
-  // const [user, setUser] = useState();
-
-  // useEffect(() => {
-  //   if (checkLoginStatus()) {
-  //     setUser(getLocal("user"))
-  //   }
-  // }, [user])
   let user = getLocal('user');
 
-  console.log( )
-
-  const getUserName = () => {
-    return user.username;
+  var userExpireDate = dateFormat(user?.expireDate, 'yyyy-mm-dd')
+  var today = dateFormat(new Date(), 'yyyy-mm-dd')
+  console.log(userExpireDate)
+  console.log(today)
+  console.log(userExpireDate > today)
+  const getUserRole = () => {
+    if(user.role) {
+      return 'Admin'
+    }
+    else if (userExpireDate > today) {
+      return 'Premium'
+    }
+    else {
+      return 'Free User'
+    }
   }
 
   // to be finished
-  const getRole = () => {
-    return "Admin"
-  }
 
   const getUserIconImage = () => {
     return "/user-icons/" + user.icon
@@ -136,11 +138,15 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "15px 0 10px 0" }}
                 >
-                  {getUserName()}
+                  {user.username}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  {getRole()}
+                  {getUserRole()}
                 </Typography>
+            
+                 {getUserRole() === "Premium" && <Typography variant="h6" color={colors.redAccent[600]}>
+                  Expires: {userExpireDate}
+                </Typography>}
               </Box>
             </Box>
           )}
