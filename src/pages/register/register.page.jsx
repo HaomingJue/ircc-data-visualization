@@ -60,7 +60,6 @@ function RegisterPage() {
         var firstName = data.get("first_name");
         var lastName = data.get("last_name");
         var gender = data.get("gender")
-        console.log(gender)
         if (password !== repeatPassword) {
           alert('Password does not match!')
         }
@@ -75,7 +74,6 @@ function RegisterPage() {
           registerRequest["first_name"] = firstName;
           registerRequest["last_name"] = lastName;
           registerRequest["user_gender"] = gender;
-          console.log(registerRequest)
           let request = new HttpRequest('Post', '/login/register/', registerRequest);
           handleRequest(request).then((a) => handleRegister(a)).catch((err) => handleRegister(err));
         }
