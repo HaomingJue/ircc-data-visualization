@@ -40,7 +40,6 @@ export function LoginPage() {
   const handleLogin = (result) => {
     let status = result['status'];
     let data = result['data'];
-    console.log(data)
     if (status >= 200 && status <= 299) {
       let currentUser = new User(data);
       console.log(currentUser);
