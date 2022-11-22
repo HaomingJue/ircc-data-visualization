@@ -22,7 +22,6 @@ const handleRequest = (request) => {
     let requestHeaders = {
         'Authorization': token && 'Token ' + token
     };
-    console.log("requestHeaders:", requestHeaders);
     try{
         let url = request.url;
         switch(request.type) {
