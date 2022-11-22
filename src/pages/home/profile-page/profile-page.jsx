@@ -99,7 +99,6 @@ const ProgfilePage = () => {
         registerRequest["user_icon"] = data.get('iconId');
         registerRequest["user_address"] = data.get('address');
         registerRequest["user_postcode"] = data.get('postcode');
-        registerRequest["user_email"] = data.get('email');
 
         let request = new HttpRequest('Put', `/login/update/${data.get('userId')}`, registerRequest);
         handleRequest(request).then((a) => handleUpdate(a)).catch((err) => handleUpdate(err));
@@ -293,17 +292,6 @@ const ProgfilePage = () => {
                             id="lastName"
                             label="Last Name"
                             name="lastName"
-                            fullWidth
-                            variant="standard"
-                        />
-                        <TextField
-                            autoFocus
-                            defaultValue={user?.user_email}
-                            required
-                            margin="dense"
-                            id="email"
-                            label="Email"
-                            name="email"
                             fullWidth
                             variant="standard"
                         />
