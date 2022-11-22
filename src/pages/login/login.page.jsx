@@ -46,7 +46,7 @@ export function LoginPage() {
       navigate("/home/dashboard");
     } else {
       // show modal;
-      alert("Login Error.");
+      alert('Login Error\n' + result.message + '\n' + result.request.response);
     }
   } 
 

@@ -17,6 +17,8 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
+import { getLocal } from "../service/localStorage";
+import dateFormat from 'dateformat';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -37,6 +39,33 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+
+  let user = getLocal('user');
+
+  var userExpireDate = dateFormat(user?.expireDate, 'yyyy-mm-dd')
+  var today = dateFormat(new Date(), 'yyyy-mm-dd')
+  console.log(userExpireDate)
+  console.log(today)
+  console.log(userExpireDate > today)
+  const getUserRole = () => {
+    if(user.role) {
+      return 'Admin'
+    }
+    else if (userExpireDate > today) {
+      return 'Premium'
+    }
+    else {
+      return 'Free User'
+    }
+  }
+
+  // to be finished
+
+  const getUserIconImage = () => {
+    return "/user-icons/" + user.icon
+  }
+
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -45,7 +74,6 @@ const Sidebar = () => {
   return (
     <Box 
       display={"flex"}
-      minHeight={"100%"}
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
@@ -99,7 +127,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src="/user-icons/elon-musk.png"
+                  src={getUserIconImage()}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -110,11 +138,15 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "15px 0 10px 0" }}
                 >
-                  Elon Musk
+                  {user.username}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin
+                  {getUserRole()}
                 </Typography>
+            
+                 {getUserRole() === "Premium" && <Typography variant="h6" color={colors.redAccent[600]}>
+                  Expires: {userExpireDate}
+                </Typography>}
               </Box>
             </Box>
           )}
@@ -127,38 +159,41 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            { !isCollapsed && 
-                        <Typography
-                        variant="h7"
-                        color={colors.grey[300]}
-                        sx={{ m: "15px 0 5px 20px" }}
-                      >
-                        Admin Space
-                      </Typography>
-
-            }
-
-            <Item
-              title="Manage User"
-              to="/home/manage-user"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Create User"
-              to="/home/create-user"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Manage Data"
-              to="/home/manage-data"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+           
+                { (!isCollapsed && getUserRole() ==='Admin') && 
+                            <Typography
+                            variant="h7"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                          >
+                            Admin Space
+                          </Typography>
+                }
+              {  getUserRole() ==='Admin' &&
+                <Box>
+                <Item
+                  title="Manage User"
+                  to="/home/manage-user"
+                  icon={<PeopleOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Create User"
+                  to="/home/create-user"
+                  icon={<ContactsOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Manage Data"
+                  to="/home/manage-data"
+                  icon={<ReceiptOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                </Box>
+              }
             { !isCollapsed && <Typography
                 variant="h7"
                 color={colors.grey[300]}
@@ -166,7 +201,7 @@ const Sidebar = () => {
               >
                 General
               </Typography>
-}           
+            }           
             <Item
               title="Profile"
               to="/home/profile"
