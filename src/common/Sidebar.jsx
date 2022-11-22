@@ -159,38 +159,41 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            { !isCollapsed && 
-                        <Typography
-                        variant="h7"
-                        color={colors.grey[300]}
-                        sx={{ m: "15px 0 5px 20px" }}
-                      >
-                        Admin Space
-                      </Typography>
-
-            }
-
-            <Item
-              title="Manage User"
-              to="/home/manage-user"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Create User"
-              to="/home/create-user"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Manage Data"
-              to="/home/manage-data"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+           
+                { (!isCollapsed && getUserRole() ==='Admin') && 
+                            <Typography
+                            variant="h7"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                          >
+                            Admin Space
+                          </Typography>
+                }
+              {  getUserRole() ==='Admin' &&
+                <Box>
+                <Item
+                  title="Manage User"
+                  to="/home/manage-user"
+                  icon={<PeopleOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Create User"
+                  to="/home/create-user"
+                  icon={<ContactsOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Manage Data"
+                  to="/home/manage-data"
+                  icon={<ReceiptOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                </Box>
+              }
             { !isCollapsed && <Typography
                 variant="h7"
                 color={colors.grey[300]}
@@ -198,7 +201,7 @@ const Sidebar = () => {
               >
                 General
               </Typography>
-}           
+            }           
             <Item
               title="Profile"
               to="/form"
