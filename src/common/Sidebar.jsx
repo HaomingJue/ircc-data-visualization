@@ -45,7 +45,6 @@ const Sidebar = () => {
   return (
     <Box 
       display={"flex"}
-      flex-flexDirection={"column"}
       minHeight={"100%"}
       sx={{
         "& .pro-sidebar-inner": {
@@ -170,7 +169,7 @@ const Sidebar = () => {
 }           
             <Item
               title="Profile"
-              to="/form"
+              to="/home/profile"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

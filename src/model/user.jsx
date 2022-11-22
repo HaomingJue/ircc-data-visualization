@@ -10,6 +10,9 @@ class User {
         this.phone = response['user']['user_phone'];
         this.icon = response['user']['user_icon'];
         this.expireDate = response['subscription']['expire_date'];
+        this.userBirthDay = response['user']['user_birthdate'];
+        this.firstName = response['user']['first_name'];
+        this.lastName = response['user']['last_name'];
     }
 }
 

@@ -42,7 +42,6 @@ export function LoginPage() {
     let data = result['data'];
     if (status >= 200 && status <= 299) {
       let currentUser = new User(data);
-      console.log(currentUser);
       setLocal('user', currentUser);
       navigate("/home/dashboard");
     } else {
