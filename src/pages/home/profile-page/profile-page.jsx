@@ -63,7 +63,7 @@ const ProgfilePage = () => {
                 <Typography sx={{ mb: 1.5 }} color={colors.redAccent[500]}>Premium User</Typography>
                 <LinearProgress variant="determinate" value={60} />
                 <Typography sx={{ mt: 1.5, mb: -1.5, fontSize: 'bold' }} variant="body2">
-                    {`Your Plan will be expired at: ${dateFormat(user?.expireDate, 'yyyy/dd/MM')}`}
+                    {`Your Plan will be expired at: ${dateFormat(user?.expireDate, 'yyyy-mm-dd')}`}
                 </Typography>
             </>
         } else {
@@ -165,7 +165,7 @@ const ProgfilePage = () => {
                                         <Cake />
                                     </ListItemIcon>
                                     <ListItemText sx={{maxWidth: '30%', color: colors.blueAccent[500]}} primary="Birthday: " />
-                                    <ListItemText sx={{justifyContent: 'center'}} primary={dateFormat(user?.userBirthDay, 'yyyy/dd/MM')} />
+                                    <ListItemText sx={{justifyContent: 'center'}} primary={dateFormat(user?.userBirthDay, 'yyyy-mm-dd')} />
                                 </ListItem>
                                 <ListItem>
                                     <ListItemIcon>
@@ -309,7 +309,7 @@ const ProgfilePage = () => {
                         />
                         <TextField
                             autoFocus
-                            defaultValue={dateFormat(user?.userBirthDay, 'yyyy/dd/MM')}
+                            defaultValue={dateFormat(user?.userBirthDay, 'yyyy-mm-dd')}
                             margin="dense"
                             id="userBirthDay"
                             label="BirthDay"
