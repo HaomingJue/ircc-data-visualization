@@ -44,9 +44,6 @@ const Sidebar = () => {
 
   var userExpireDate = dateFormat(user?.expireDate, 'yyyy-mm-dd')
   var today = dateFormat(new Date(), 'yyyy-mm-dd')
-  console.log(userExpireDate)
-  console.log(today)
-  console.log(userExpireDate > today)
   const getUserRole = () => {
     if(user.role) {
       return 'Admin'

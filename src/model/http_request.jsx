@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getLocal } from '../service/localStorage';
 
-var BASE_URL = "https://irccdjangowebapp.azurewebsites.net"
+var BASE_URL = "http://127.0.0.1:8000"
 
 class HttpRequest {
 
@@ -18,7 +18,7 @@ const getLoginToken = () => {
 }
 
 const handleRequest = (request) => {
-    let token = getLoginToken("");
+    let token = getLoginToken();
     let requestHeaders = {
         'Authorization': token && 'Token ' + token
     };
@@ -26,7 +26,7 @@ const handleRequest = (request) => {
         let url = request.url;
         switch(request.type) {
             case 'Get':
-                return axios({method: 'get', url, data: request.object});
+                return axios({method: 'get', url, data: request.object, headers: requestHeaders});
             case 'Post':
                 return axios({method: 'post', url, data: request.object, headers: requestHeaders});
             case 'Put':
