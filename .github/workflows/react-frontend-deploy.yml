@@ -3,7 +3,7 @@ name: React CI/CD
 on:
 #   pull_request:
   push:
-    branches: [ "main" ]
+    branches: [ "main_disabled" ]
 
 env:
   AZURE_WEBAPP_NAME: irccreactwebappdev
