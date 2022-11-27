@@ -11,7 +11,6 @@ import Header from "../../../components/GridHeader";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
-import { ConstructionOutlined, RowingSharp } from '@mui/icons-material';
 
 const ManageUserPage = () => {
   const theme = useTheme();
@@ -28,7 +27,6 @@ const ManageUserPage = () => {
       navigate("/login");
     }
     getImmigrationColumn();
-    rowConstruct();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[navigate])
 
@@ -52,39 +50,17 @@ const ManageUserPage = () => {
         editable: true,
       });
     }
+    console.log(data)
     setColumns(columns);
     setRows(data)
   }
 
-  var allRows = []
-
-  // ---------------------------------------------------------------------------------------------------
-  const rowConstruct = (data) => {
-
-    for (let i = 1; i < 2; i++) {
-      var currentRow = []
-      let request = new HttpRequest('Get', "/datasource/immigration/" + i);
-      handleRequest(request)
-      // eslint-disable-next-line no-loop-func
-      .then((data) => {
-        console.log(data.data)
-        for (var variable in data.data) {
-          currentRow.push(data.data[variable])
-        }
-        console.log(currentRow)
-        allRows.push(currentRow);
-      })
-      .catch((err) => console.log(err));
-    }
-    console.log(allRows)
-  }
-//==========================================================================================================
 
 
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Immigration Data Form" subtitle="Check IRCC's public immigration records" />
+        <Header title="Immigration Data Records" subtitle="Check IRCC's public immigration records" />
         <Button
           sx={{
             backgroundColor: colors.blueAccent[700],
@@ -131,7 +107,7 @@ const ManageUserPage = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={allRows} columns={columns} />
+        <DataGrid checkboxSelection rows={rows} columns={columns} />
       </Box>
     </Box>
   );
