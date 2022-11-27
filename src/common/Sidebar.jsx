@@ -229,7 +229,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Bar Chart"
+              title="Destination Chart"
               to="/home/bar-chart"
               icon={<BarChartOutlinedIcon />}
               selected={selected}

@@ -1,15 +1,46 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../common/theme";
-import { mockBarData as data } from "../mockData/mockData";
+import { handleRequest, HttpRequest } from "../model/http_request";
+import { checkLoginStatus } from "../service/checkLoginStatus";
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  let navigate = useNavigate()
+
+  useEffect( () => {
+    if (!checkLoginStatus()) {
+      navigate("/login");
+    }
+    getImmigrationColumn();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[navigate])
+
+
+  const [destData, setDestData] = useState([])
+
+  const getImmigrationColumn = () => {
+    let request = new HttpRequest('Get', "/datasource/destination/*");
+    handleRequest(request).then((data) => constructData(data.data)).catch((err) => alert(err));
+  }
+
+  const constructData = (data) => {
+    setDestData(data)
+    var allRows = []
+    for (var i = 0; i < data.length; i++) {
+      allRows.push(data[i]);
+    }
+    setDestData(allRows)
+  }
+
+
   return (
     <ResponsiveBar
-      data={data}
+      data={destData}
       theme={{
         // added
         axis: {
@@ -39,8 +70,13 @@ const BarChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
+      keys={["business_immigrant",
+           "canadian_experience_class",
+            "family_sponsorship", 
+            "province_nominee_program", 
+            "quebec_skilled_worker",
+            "federal_skilled_worker"]}
+      indexBy="province"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
