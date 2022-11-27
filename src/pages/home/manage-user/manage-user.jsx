@@ -68,7 +68,7 @@ const ManageUserPage = () => {
       alert("Create User Succesfully")
       getUserColumn();
     } else {
-      alert("Create User Error");
+      alert('Create Error\n' + result.message + '\n' + result.request.response);
     }
   }
 
