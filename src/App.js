@@ -7,7 +7,6 @@ import  HomePage from './pages/home/home.page';
 import { ColorModeContext, useMode } from './common/theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import UserGridPage from './pages/home/manage-user/manage-user';
-import CreateUserPage from './pages/home/create-user/create-user';
 import FAQ from './pages/home/faq/faq';
 import ManageDataPage from './pages/home/manage-data/manage-data';
 import DataFormPage from './pages/home/data-form/data-form';
@@ -34,7 +33,6 @@ function App() {
             <Route path="/home" element={<HomePage/>} >
               <Route path="dashboard" element={<DashboardPage/>}></Route>
               <Route path="manage-user" element={<UserGridPage/>} />
-              <Route path="create-user" element={<CreateUserPage/>} />
               <Route path="manage-data" element={<ManageDataPage/>} />
               <Route path="profile" element={<ProgfilePage/>} />
               <Route path="premium" element={<PremiumPage/>} />
