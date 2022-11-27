@@ -40,6 +40,7 @@ const ManageUserPage = () => {
       navigate("/login");
     }
     getUserColumn();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[navigate])
 
   const getUserColumn = () => {
