@@ -50,7 +50,6 @@ const ManageUserPage = () => {
         editable: true,
       });
     }
-    console.log(data)
     setColumns(columns);
     setRows(data)
   }
