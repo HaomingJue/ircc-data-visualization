@@ -330,8 +330,22 @@ export const mockTransactions = [
 
 ];
 
+export const mockNewBarData = [
+  {
+    "business_immigrant" : "130928",
+    "canadian_experience_class" : "97148",
+    "family_sponsorship" : "243390",
+    "federal_skilled_worker" : "302263",
+    "id":"1",
+    province: "ON",
+    provincial_nominee_program: "369860",
+    quebec_skilled_worker: "204982"
+  }
+]
+
 export const mockBarData = [
   {
+    a:1,
     country: "AD",
     "hot dog": 137,
     "hot dogColor": "hsl(229, 70%, 50%)",
@@ -343,6 +357,7 @@ export const mockBarData = [
     donutColor: "hsl(340, 70%, 50%)",
   },
   {
+    a:1,
     country: "AE",
     "hot dog": 55,
     "hot dogColor": "hsl(307, 70%, 50%)",
@@ -354,6 +369,7 @@ export const mockBarData = [
     donutColor: "hsl(275, 70%, 50%)",
   },
   {
+    a:1,
     country: "AF",
     "hot dog": 109,
     "hot dogColor": "hsl(72, 70%, 50%)",
@@ -365,6 +381,7 @@ export const mockBarData = [
     donutColor: "hsl(256, 70%, 50%)",
   },
   {
+    a:1,
     country: "AG",
     "hot dog": 133,
     "hot dogColor": "hsl(257, 70%, 50%)",
@@ -376,6 +393,7 @@ export const mockBarData = [
     donutColor: "hsl(9, 70%, 50%)",
   },
   {
+    a:1,
     country: "AI",
     "hot dog": 81,
     "hot dogColor": "hsl(190, 70%, 50%)",
@@ -387,6 +405,7 @@ export const mockBarData = [
     donutColor: "hsl(285, 70%, 50%)",
   },
   {
+    a:1,
     country: "AL",
     "hot dog": 66,
     "hot dogColor": "hsl(208, 70%, 50%)",
@@ -398,6 +417,7 @@ export const mockBarData = [
     donutColor: "hsl(76, 70%, 50%)",
   },
   {
+    a:1,
     country: "AM",
     "hot dog": 80,
     "hot dogColor": "hsl(87, 70%, 50%)",
