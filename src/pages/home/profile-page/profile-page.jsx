@@ -91,9 +91,13 @@ const ProgfilePage = () => {
         setShowModal(false);
         const data = new FormData(event.currentTarget);
         let registerRequest = {};
+        const first_name = data.get('firstName');
+        const last_name = data.get('last_name');
+        const full_name = first_name + ' ' + last_name;
         registerRequest["username"] = data.get('username');
-        registerRequest["first_name"] = data.get('firstName');
-        registerRequest["last_name"] = data.get('lastName');
+        registerRequest["first_name"] = first_name;
+        registerRequest["last_name"] = last_name;
+        registerRequest["full_name"] = full_name;
         registerRequest["user_gender"] = data.get('gender');
         registerRequest["user_phone"] = data.get('phone');
         registerRequest["user_icon"] = data.get('iconId');

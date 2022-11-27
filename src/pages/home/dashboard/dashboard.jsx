@@ -25,13 +25,11 @@ const DashboardPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome IRCC Data Visualization Dashboard" />
-
         <Box>
           <Button
            onClick={() => {navigate("/home/premium")}}
@@ -57,7 +55,6 @@ const DashboardPage = () => {
         borderBottom="20px"
         gap="20px"
       >
-
         {/* ROW 1 */}
         <Box
           gridColumn="span 8"
