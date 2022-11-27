@@ -82,7 +82,7 @@ const ProgfilePage = () => {
           alert("Update Succesfully, New info will show at next Login")
         } else {
           // show modal;
-          alert("Update Error");
+          alert('Update Error\n' + result.message + '\n' + result.request.response);
         }
       }
 
@@ -92,7 +92,7 @@ const ProgfilePage = () => {
         const data = new FormData(event.currentTarget);
         let registerRequest = {};
         const first_name = data.get('firstName');
-        const last_name = data.get('last_name');
+        const last_name = data.get('lastName');
         const full_name = first_name + ' ' + last_name;
         registerRequest["username"] = data.get('username');
         registerRequest["first_name"] = first_name;
