@@ -320,7 +320,13 @@ const handleSubmit = (event) => {
             </Box>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => {setShowModal(false)}}>Cancel</Button>
+            <Button
+              variant='contained'
+              sx={{ mt: 3, mb: 2, backgroundColor: colors.primary[800], ':hover': {bgcolor: colors.primary[300]}}}
+              onClick={() => {setShowModal(false)}}
+            >
+              Cancel
+            </Button>
           </DialogActions>
       </Dialog>
     </Box>
