@@ -33,7 +33,7 @@ const ManageUserPage = () => {
   },[navigate])
 
   const getImmigrationColumn = () => {
-    let request = new HttpRequest('Get', "/datasource/immigration/1");
+    let request = new HttpRequest('Get', "/datasource/immigration/*");
     handleRequest(request).then((data) => columnConstruct(data.data)).catch((err) => alert(err));
   }
 
@@ -44,8 +44,7 @@ const ManageUserPage = () => {
 
   const columnConstruct = (data) => {
     const columns = [];
-    for (let variable in data) {
-      console.log(variable)
+    for (let variable in data[0]) {
       columns.push({
         field: variable,
         headerName: columnMap[variable] !== undefined ? columnMap[variable] : variable,
@@ -54,28 +53,30 @@ const ManageUserPage = () => {
       });
     }
     setColumns(columns);
+    setRows(data)
   }
 
-  console.log(columns)
-
+  var allRows = []
 
   // ---------------------------------------------------------------------------------------------------
   const rowConstruct = (data) => {
-    var allRows = []
+
     for (let i = 1; i < 2; i++) {
       var currentRow = []
       let request = new HttpRequest('Get', "/datasource/immigration/" + i);
       handleRequest(request)
       // eslint-disable-next-line no-loop-func
-      .then((a) => {
-        for (let variable in data) {
-          currentRow.push(data[variable])
+      .then((data) => {
+        console.log(data.data)
+        for (var variable in data.data) {
+          currentRow.push(data.data[variable])
         }
+        console.log(currentRow)
         allRows.push(currentRow);
       })
       .catch((err) => console.log(err));
     }
-    setRows(allRows)
+    console.log(allRows)
   }
 //==========================================================================================================
 
@@ -130,7 +131,7 @@ const ManageUserPage = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={rows} columns={columns} />
+        <DataGrid checkboxSelection rows={allRows} columns={columns} />
       </Box>
     </Box>
   );
