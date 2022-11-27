@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
@@ -175,13 +174,6 @@ const Sidebar = () => {
                   title="Manage User"
                   to="/home/manage-user"
                   icon={<PeopleOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="Create User"
-                  to="/home/create-user"
-                  icon={<ContactsOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
