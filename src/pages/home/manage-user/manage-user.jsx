@@ -29,8 +29,9 @@ const ManageUserPage = () => {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [iconId, setIconId] = useState("icon-1");
+  const [iconId, setIconId] = useState("icon-1.png");
   const [gender, setGender] = useState("Male");
+  const [isStaff, setIsStaff] = useState(false);
 
   let navigate = useNavigate();
   
@@ -63,9 +64,10 @@ const ManageUserPage = () => {
   const handleUpdate = (result) => {
     let status = result['status'];
     if (status >= 200 && status <= 299) {
-      alert("Update Succesfully, New info will show at next Login")
+      alert("Create User Succesfully")
+      getUserColumn();
     } else {
-      alert("Update Error");
+      alert("Create User Error");
     }
   }
 
@@ -75,9 +77,10 @@ const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
     let registerRequest = {};
     const first_name = data.get('firstName');
-    const last_name = data.get('last_name');
+    const last_name = data.get('lastName');
     const full_name = first_name + ' ' + last_name;
     registerRequest["username"] = data.get('username');
+    registerRequest["password"] = data.get('password');
     registerRequest["first_name"] = first_name;
     registerRequest["last_name"] = last_name;
     registerRequest["full_name"] = full_name;
@@ -98,6 +101,10 @@ const handleSubmit = (event) => {
 
   const handleGenderChange = (e) => {
     setGender(e.target.value)
+  };
+
+  const handleAdminChange = (e) => {
+    setIsStaff(e.target.value)
   };
 
   return (
@@ -169,7 +176,7 @@ const handleSubmit = (event) => {
             </Box>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <Grid container columnSpacing={2}>
-                <Grid item xs={3}/>
+                <Grid item xs={1.5}/>
                 <Grid item xs={3}>
                   <FormControl sx={{ justifyContent: 'center', marginTop: 2, minWidth: 120 }} required>
                     <InputLabel id="demo-simple-select-helper-label">Icon</InputLabel>
@@ -209,7 +216,23 @@ const handleSubmit = (event) => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={3}/>
+                <Grid item xs={3}>
+                  <FormControl sx={{ justifyContent: 'center', marginTop: 2, minWidth: 120 }} required>
+                    <InputLabel id="demo-simple-select-helper-label">Admin</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-helper-label"
+                      id={isStaff}
+                      value={isStaff}
+                      label="Is Admin"
+                      name="is_staff"
+                      onChange={handleAdminChange}
+                    >
+                      <MenuItem value={false}>Not Admin</MenuItem>
+                      <MenuItem value={true}>Admin</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={1.5}/>
               </Grid>
               <TextField
                 autoFocus
@@ -218,6 +241,16 @@ const handleSubmit = (event) => {
                 id="username"
                 label="Username"
                 name="username"
+                fullWidth
+                variant="standard"
+              />
+              <TextField
+                autoFocus
+                defaultValue={''}
+                margin="dense"
+                id="password"
+                label="Password"
+                name="password"
                 fullWidth
                 variant="standard"
               />

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getLocal } from '../service/localStorage';
 
-var BASE_URL = "http://127.0.0.1:8000"
+var BASE_URL = "https://irccdjangowebapp.azurewebsites.net"
 
 class HttpRequest {
 
