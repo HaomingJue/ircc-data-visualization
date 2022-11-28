@@ -87,7 +87,7 @@ const PieChart = ({isDashboard=false}) => {
           },
         },
       }}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      margin={{ top: 40, right: 80, bottom: isDashboard ? 25 : 80, left: 80 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
@@ -100,13 +100,14 @@ const PieChart = ({isDashboard=false}) => {
       arcLinkLabelsTextColor={colors.grey[100]}
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: "color" }}
-      enableArcLabels={false}
+      enableArcLabels={isDashboard ? false : true}
       arcLabelsRadiusOffset={0.4}
       arcLabelsSkipAngle={7}
       arcLabelsTextColor={{
         from: "color",
         modifiers: [["darker", 2]],
       }}
+      isInteractive={true}
       defs={[
         {
           id: "dots",
@@ -146,7 +147,7 @@ const PieChart = ({isDashboard=false}) => {
             {
               on: "hover",
               style: {
-                itemTextColor: "#000",
+                itemTextColor: colors.primary[100],
               },
             },
           ],
