@@ -21,21 +21,24 @@ import {
     ListItemIcon, 
     ListItemText
 } from "@mui/material";
+import TransgenderOutlinedIcon from '@mui/icons-material/TransgenderOutlined';
 import { useNavigate } from "react-router-dom";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useEffect, useState } from "react";
-import { getLocal } from "../../../service/localStorage";
+import { getLocal, updateLocal } from "../../../service/localStorage";
 import dateFormat from 'dateformat';
 import { Home, AccountCircle, Cake, PhoneAndroid, Signpost } from '@mui/icons-material';
 import { useTheme } from '@emotion/react';
 import { tokens } from "../../../common/theme";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
+import { User } from "../../../model/user";
 
 const ProgfilePage = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     const [iconId, setIconId] = useState("icon-1");
+    const [user, setUser] = useState(getLocal('user') || new User())
     
     let navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -44,9 +47,8 @@ const ProgfilePage = () => {
         if (!checkLoginStatus()) {
             navigate("/login");
         }
-        let user = getLocal('user');
         setIconId(user.icon);
-    }, [navigate])
+    }, [navigate, user])
 
     const [gender, setGender] = useState("Male");
 
@@ -54,7 +56,6 @@ const ProgfilePage = () => {
       setGender(e.target.value)
     };
 
-    let user = getLocal('user');
     let subscriptionStatus = Date.parse(user?.expireDate) > Date.now();
 
     const userStatusContent = (subscriptionStatus) => {
@@ -79,7 +80,8 @@ const ProgfilePage = () => {
     const handleUpdate = (result) => {
         let status = result['status'];
         if (status >= 200 && status <= 299) {
-          alert("Update Succesfully, New info will show at next Login")
+          alert("Update Succesfully")
+          setUser(updateLocal())
         } else {
           // show modal;
           alert('Update Error\n' + result.message + '\n' + result.request.response);
@@ -169,6 +171,13 @@ const ProgfilePage = () => {
                                     </ListItemIcon>
                                     <ListItemText sx={{maxWidth: '30%', color: colors.blueAccent[500]}} primary="Birthday: " />
                                     <ListItemText sx={{justifyContent: 'center'}} primary={dateFormat(user?.userBirthDay, 'yyyy-mm-dd')} />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <TransgenderOutlinedIcon />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{maxWidth: '30%', color: colors.blueAccent[500]}} primary="Gender: " />
+                                    <ListItemText primary={user.gender} />
                                 </ListItem>
                                 <ListItem>
                                     <ListItemIcon>

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../common/theme";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+import AddIcon from '@mui/icons-material/Add';
 import Header from "../../../components/GridHeader";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
@@ -122,7 +122,7 @@ const handleSubmit = (event) => {
           }}
           onClick={() => {setShowModal(true)}}
         >
-          <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
+          <AddIcon sx={{ mr: "10px" }} />
           Add New User
         </Button>
       </Box>
