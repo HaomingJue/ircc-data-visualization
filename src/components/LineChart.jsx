@@ -6,11 +6,10 @@ import { checkLoginStatus } from "../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from '../model/http_request';
 
-const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
+const LineChart = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [lineData, setLineData] = useState([]);
-    const [yMax, setYMax] = useState(400000);
 
     let navigate = useNavigate();
 
@@ -106,7 +105,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
             },
           },
         }}
-        colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
+        colors={{ scheme: "nivo" }} // added
         margin={{ top: 50, right: 150, bottom: 50, left: 100 }}
         xScale={{ type: "point" }}
         yScale={{
