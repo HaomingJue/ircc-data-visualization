@@ -243,7 +243,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Line Chart"
+              title="Yearly Trends"
               to="/home/line-chart"
               icon={<TimelineOutlinedIcon />}
               selected={selected}

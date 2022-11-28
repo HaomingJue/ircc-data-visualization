@@ -11,8 +11,6 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../../../components/PieChart";
 
-
-
 const DashboardPage = () => {
   
   let navigate = useNavigate();
@@ -71,18 +69,11 @@ const DashboardPage = () => {
           >
             <Box>
               <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Revenue Generated
-              </Typography>
-              <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                Yearly Trends
               </Typography>
             </Box>
           </Box>
