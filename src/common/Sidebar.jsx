@@ -229,14 +229,14 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Destination Chart"
+              title="Destination Statistics"
               to="/home/bar-chart"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Pie Chart"
+              title="Category Proportion"
               to="/home/pie-chart"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}

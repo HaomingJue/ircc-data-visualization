@@ -5,7 +5,7 @@ import PieChart from "../../../components/PieChart";
 const PieChartPage = () => {
   return (
     <Box m="20px">
-      <Header title="Pie Chart" subtitle="Simple Pie Chart" />
+      <Header title="Category Proportion" subtitle="Compare Different Immigration Channels" />
       <Box height="75vh">
         <PieChart />
       </Box>
