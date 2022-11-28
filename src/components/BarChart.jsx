@@ -34,13 +34,9 @@ const BarChart = ({ isDashboard = false }) => {
     for (var i = 0; i < data.length; i++) {
       allRows.push(data[i]);
     }
-    console.log(allRows[0])
     allRows.sort(function(a, b) {
       return b['total'] - a['total']
     })
-    for (var i1 = 0; i1 < data.length; i1++) {
-      console.log(allRows[i1]['total'])
-    }
     setDestData(allRows)
   }
 
