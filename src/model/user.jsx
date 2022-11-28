@@ -13,6 +13,7 @@ class User {
         this.userBirthDay = response['user']['user_birthdate'];
         this.firstName = response['user']['first_name'];
         this.lastName = response['user']['last_name'];
+        this.gender = response['user']['user_gender'];
     }
 }
 
