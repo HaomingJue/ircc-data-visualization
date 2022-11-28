@@ -108,6 +108,7 @@ const PieChart = ({isDashboard=false}) => {
         modifiers: [["darker", 2]],
       }}
       isInteractive={true}
+      tooltip={function(e) {}}
       defs={[
         {
           id: "dots",

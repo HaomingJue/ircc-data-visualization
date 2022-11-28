@@ -85,6 +85,7 @@ const BarChart = ({ isDashboard = false }) => {
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: "nivo" }}
+      tooltip={function(e) {}}
       defs={[
         {
           id: "dots",
