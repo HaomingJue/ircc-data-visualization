@@ -34,6 +34,9 @@ const BarChart = ({ isDashboard = false }) => {
     for (var i = 0; i < data.length; i++) {
       allRows.push(data[i]);
     }
+    allRows.sort(function(a, b) {
+      return b['total'] - a['total']
+    })
     setDestData(allRows)
   }
 
@@ -77,7 +80,7 @@ const BarChart = ({ isDashboard = false }) => {
             "quebec_skilled_worker",
             "federal_skilled_worker"]}
       indexBy="province"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 200, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
