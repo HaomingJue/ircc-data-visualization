@@ -101,6 +101,7 @@ const ProgfilePage = () => {
         registerRequest["last_name"] = last_name;
         registerRequest["full_name"] = full_name;
         registerRequest["user_gender"] = data.get('gender');
+        registerRequest["email"] = data.get('userEmail');
         registerRequest["user_phone"] = data.get('phone');
         registerRequest["user_icon"] = data.get('iconId');
         registerRequest["user_address"] = data.get('address');
@@ -169,8 +170,8 @@ const ProgfilePage = () => {
                                     <ListItemIcon>
                                         <Cake />
                                     </ListItemIcon>
-                                    <ListItemText sx={{maxWidth: '30%', color: colors.blueAccent[500]}} primary="Birthday: " />
-                                    <ListItemText sx={{justifyContent: 'center'}} primary={dateFormat(user?.userBirthDay, 'yyyy-mm-dd')} />
+                                    <ListItemText sx={{maxWidth: '30%', color: colors.blueAccent[500]}} primary="Email: " />
+                                    <ListItemText sx={{justifyContent: 'center'}} primary={user?.email} />
                                 </ListItem>
                                 <ListItem>
                                     <ListItemIcon>
@@ -310,13 +311,13 @@ const ProgfilePage = () => {
                         />
                         <TextField
                             autoFocus
-                            defaultValue={dateFormat(user?.userBirthDay, 'yyyy-mm-dd')}
+                            defaultValue={user?.userEmail}
                             margin="dense"
-                            id="userBirthDay"
-                            label="BirthDay"
+                            id="userEmail"
+                            label="Email"
+                            name="userEmail"
                             fullWidth
                             variant="standard"
-                            disabled
                         />
                         <TextField
                             autoFocus
