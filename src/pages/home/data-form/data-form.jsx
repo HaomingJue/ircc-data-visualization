@@ -12,7 +12,7 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
 
-const ManageUserPage = () => {
+const DataFormPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -115,4 +115,4 @@ const ManageUserPage = () => {
   );
 };
 
-export default ManageUserPage;
+export default DataFormPage;

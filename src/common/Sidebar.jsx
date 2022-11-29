@@ -175,7 +175,7 @@ const Sidebar = () => {
                   setSelected={setSelected}
                 />
                 <Item
-                  title="Manage Data"
+                  title="Manage Records"
                   to="/home/manage-data"
                   icon={<ReceiptOutlinedIcon />}
                   selected={selected}
@@ -222,7 +222,7 @@ const Sidebar = () => {
             </Typography>
             }
             <Item
-              title="Data Form"
+              title="Immigration Records"
               to="/home/data-form"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
@@ -256,7 +256,6 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
           </Box>
         </Menu>
       </ProSidebar>
