@@ -106,7 +106,7 @@ const LineChart = () => {
           },
         }}
         colors={{ scheme: "nivo" }} // added
-        margin={{ top: 50, right: 150, bottom: 50, left: 100 }}
+        margin={{ top: 50, right: 200, bottom: 50, left: 100 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",

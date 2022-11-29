@@ -1,10 +1,11 @@
-import { useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { tokens } from "../common/theme";
 import { handleRequest, HttpRequest } from "../model/http_request";
 import { checkLoginStatus } from "../service/checkLoginStatus";
+import { BasicTooltip } from '@nivo/tooltip';
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
@@ -85,6 +86,18 @@ const BarChart = ({ isDashboard = false }) => {
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: "nivo" }}
+      tooltip={(props) => {
+        console.log(props)
+        return (
+          <Box color={"#040509"}>
+            <BasicTooltip
+                id={props.id}
+                value={props.formattedValue}
+                color={props.color}
+                enableChip
+            />
+          </Box>
+        );}}
       defs={[
         {
           id: "dots",

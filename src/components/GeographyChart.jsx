@@ -1,8 +1,9 @@
-import { useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { geoFeatures } from "../mockData/mockGeoFeatures";
 import { tokens } from "../common/theme";
 import { mockGeographyData as data } from "../mockData/mockData";
+import { BasicTooltip } from '@nivo/tooltip';
 
 const GeographyChart = ({ isDashboard = false }) => {
   const theme = useTheme();
@@ -49,6 +50,18 @@ const GeographyChart = ({ isDashboard = false }) => {
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor="#ffffff"
+      tooltip={(props) => {
+        return (
+          <Box color={"#040509"}>
+            <BasicTooltip
+                id={props.feature.id}
+                value={props.feature.formattedValue}
+                color={props.feature.color}
+                enableChip
+                style= {{color: "#6699ff"}}
+            />
+          </Box>
+        );}}
       legends={
         !isDashboard
           ? [

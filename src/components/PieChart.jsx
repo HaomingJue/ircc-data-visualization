@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { checkLoginStatus } from "../service/checkLoginStatus";
 import { handleRequest, HttpRequest } from "../model/http_request";
+import { BasicTooltip } from '@nivo/tooltip';
+import { Box } from "@mui/system";
 
 const PieChart = ({isDashboard=false}) => {
   const theme = useTheme();
@@ -56,6 +58,7 @@ const PieChart = ({isDashboard=false}) => {
 
     setProvinceData(provinceData)
   }
+
   return (
     <ResponsivePie
       data={provinceData}
@@ -87,7 +90,7 @@ const PieChart = ({isDashboard=false}) => {
           },
         },
       }}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      margin={{ top: 40, right: 80, bottom: isDashboard ? 25 : 80, left: 80 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
@@ -100,13 +103,25 @@ const PieChart = ({isDashboard=false}) => {
       arcLinkLabelsTextColor={colors.grey[100]}
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: "color" }}
-      enableArcLabels={false}
+      enableArcLabels={isDashboard ? false : true}
       arcLabelsRadiusOffset={0.4}
       arcLabelsSkipAngle={7}
       arcLabelsTextColor={{
         from: "color",
         modifiers: [["darker", 2]],
       }}
+      isInteractive={true}
+      tooltip={(props) => {
+        return (
+          <Box color={"#040509"}>
+            <BasicTooltip
+                id={props.datum.id}
+                value={props.datum.formattedValue}
+                color={props.datum.color}
+                enableChip
+            />
+          </Box>
+        );}}
       defs={[
         {
           id: "dots",
@@ -146,7 +161,7 @@ const PieChart = ({isDashboard=false}) => {
             {
               on: "hover",
               style: {
-                itemTextColor: "#000",
+                itemTextColor: colors.primary[100],
               },
             },
           ],
