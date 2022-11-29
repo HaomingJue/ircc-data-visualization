@@ -65,7 +65,7 @@ const ManageImmigrationDataPage = () => {
 
   const handleUpdate = () => {
     let request = new HttpRequest('Post', "/datasource/immigration_data/upload", {"upload_file": file.split(',')[1]});
-    handleRequest(request).then(() => getImmigrationColumn()).catch((err) => alert(err));
+    handleRequest(request).then(() => {setShowModal(false); getImmigrationColumn()}).catch((err) => alert(err));
   }
 
   const handleOnDrop = (e) => {
