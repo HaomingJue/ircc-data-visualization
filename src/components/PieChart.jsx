@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { checkLoginStatus } from "../service/checkLoginStatus";
 import { handleRequest, HttpRequest } from "../model/http_request";
+import { BasicTooltip } from '@nivo/tooltip';
+import { Box } from "@mui/system";
 
 const PieChart = ({isDashboard=false}) => {
   const theme = useTheme();
@@ -56,6 +58,7 @@ const PieChart = ({isDashboard=false}) => {
 
     setProvinceData(provinceData)
   }
+
   return (
     <ResponsivePie
       data={provinceData}
@@ -108,7 +111,17 @@ const PieChart = ({isDashboard=false}) => {
         modifiers: [["darker", 2]],
       }}
       isInteractive={true}
-      tooltip={function(e) {}}
+      tooltip={(props) => {
+        return (
+          <Box color={"#040509"}>
+            <BasicTooltip
+                id={props.datum.id}
+                value={props.datum.formattedValue}
+                color={props.datum.color}
+                enableChip
+            />
+          </Box>
+        );}}
       defs={[
         {
           id: "dots",

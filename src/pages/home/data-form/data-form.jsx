@@ -74,7 +74,7 @@ const ManageUserPage = () => {
           onClick={() => {navigate("/home/premium")}}
         >
           <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
-          UnLock Premium
+          Extend Premium
         </Button>
       </Box>
 
