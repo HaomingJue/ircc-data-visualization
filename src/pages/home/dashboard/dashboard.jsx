@@ -87,10 +87,10 @@ const DashboardPage = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-                    <Typography
+          <Typography
             variant="h5"
             fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
+            sx={{ padding: "30px 30px 0 20px" }}
           >
             Category Proportion
           </Typography>
@@ -159,7 +159,7 @@ const DashboardPage = () => {
           <Typography
             variant="h5"
             fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
+            sx={{ padding: "30px 30px 0 20px" }}
           >
             Destination Statistics
           </Typography>
@@ -171,7 +171,7 @@ const DashboardPage = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          padding="30px"
+          padding="30px 30px 0px 20px"
           marginBottom="10px"
         >
           <Typography
