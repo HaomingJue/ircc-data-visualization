@@ -21,13 +21,15 @@ export const updateLocal = () => {
 
 const updateUser = (data) => {
     const currentUser = getLocal('user');
-    currentUser['firstName'] = data.first_name;
-    currentUser['lastName'] = data.last_name;
-    currentUser['email'] = data.email;
-    currentUser['gender'] = data.user_gender;
-    currentUser['address'] = data.user_address;
-    currentUser['phone'] = data.user_phone;
-    currentUser['icon'] = data.user_icon;
-    currentUser['postcode'] = data.user_postcode;
+    currentUser['firstName'] = data['user']['first_name'];
+    currentUser['lastName'] = data['user']['first_name'];
+    currentUser['email'] = data['user']['email'];
+    currentUser['gender'] = data['user']['user_gender'];
+    currentUser['address'] = data['user']['user_address'];
+    currentUser['phone'] = data['user']['user_phone'];
+    currentUser['icon'] = data['user']['user_icon'];
+    currentUser['subId'] = data['subscription']['id'];
+    currentUser['planId'] = data['subscription']['plan_id'];
+    currentUser['expireDate'] = data['subscription']['expire_date'];
     setLocal('user', currentUser);
 }
