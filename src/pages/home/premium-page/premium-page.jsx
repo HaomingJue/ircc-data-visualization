@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { tokens } from "../../../common/theme";
 import Header from "../../../components/GridHeader";
 import PremiumCard from "../../../components/PremiumCard";
-import premiumPlan from "../../../mockData/mockPremiumPlan";
+import premiumPlan from "../../../model/premiumPlan";
 
 
 const PremiumPage = () => {
@@ -18,11 +18,11 @@ const PremiumPage = () => {
                 <Header title="Premium Space" subtitle="Welcome to Premium Space" />
             </Box>
             <Box
-            m="100px 100px 100px 100px"
+            m="100px 150px 100px 150px"
             display="grid"
             gridTemplateColumns="repeat(12, 1fr)"
 
-            gap="40px"
+            gap="100px"
             >
                 {
                     plans.map(

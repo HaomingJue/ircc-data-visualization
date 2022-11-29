@@ -14,6 +14,8 @@ class User {
         this.firstName = response['user']['first_name'];
         this.lastName = response['user']['last_name'];
         this.gender = response['user']['user_gender'];
+        this.subId = response['subscription']['id'];
+        this.planId = response['subscription']['plan_id'];
     }
 }
 
