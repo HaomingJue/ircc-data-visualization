@@ -16,6 +16,7 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
 import Dropzone from '../../../components/FileDropZone';
+import Suspense from '../../../components/LoadingSkeleton';
 
 const ManageImmigrationDataPage = () => {
   const theme = useTheme();
@@ -25,6 +26,8 @@ const ManageImmigrationDataPage = () => {
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   let navigate = useNavigate();
   
@@ -38,7 +41,8 @@ const ManageImmigrationDataPage = () => {
 
   const getImmigrationColumn = () => {
     let request = new HttpRequest('Get', "/datasource/immigration/*");
-    handleRequest(request).then((data) => columnConstruct(data.data)).catch((err) => alert(err));
+    setLoading(true);
+    handleRequest(request).then((data) => columnConstruct(data.data)).catch((err) => {setLoading(false); alert(err); setError(err)});
   }
 
   let columnMap = new Map();
@@ -61,10 +65,12 @@ const ManageImmigrationDataPage = () => {
     })
     setColumns(columns);
     setRows(data)
+    setLoading(false);
   }
 
   const handleUpdate = () => {
     let request = new HttpRequest('Post', "/datasource/immigration_data/upload", {"upload_file": file.split(',')[1]});
+    setLoading(true);
     handleRequest(request).then(() => {setShowModal(false); getImmigrationColumn()}).catch((err) => alert(err));
   }
 
@@ -133,7 +139,15 @@ const ManageImmigrationDataPage = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={rows} columns={columns} />
+        <Suspense
+          loading={loading}
+          data={rows}
+          error={error}
+          onRetry={() => getImmigrationColumn}
+          type={'table'}
+        >
+          <DataGrid checkboxSelection rows={rows} columns={columns} />
+        </Suspense>
       </Box>
       <Dialog 
           open={showModal} 

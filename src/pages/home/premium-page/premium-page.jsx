@@ -4,12 +4,33 @@ import { tokens } from "../../../common/theme";
 import Header from "../../../components/GridHeader";
 import PremiumCard from "../../../components/PremiumCard";
 import premiumPlan from "../../../model/premiumPlan";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { checkLoginStatus } from "../../../service/checkLoginStatus";
+import { handleRequest, HttpRequest } from "../../../model/http_request";
+import Suspense from "../../../components/LoadingSkeleton";
 
 const PremiumPage = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const plans = premiumPlan;
+    const [plans, setPlans] = useState(premiumPlan);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+
+    let navigate = useNavigate();
+    
+    useEffect(() => {
+        if (!checkLoginStatus()) {
+            navigate("/login");
+        }
+        getPlans();
+    }, [navigate])
+
+    const getPlans = () => {
+        let request = new HttpRequest('Get', `/plan/update/*`);
+        setLoading(true);
+        handleRequest(request).then((a) => {setPlans(a.data); setLoading(false)}).catch((err) => {setLoading(false); alert(err); setError(err)});
+    }
 
     return (
         <Box m="20px">
@@ -28,12 +49,20 @@ const PremiumPage = () => {
                     plans.map(
                         (plan) => {
                             return <Box key={plan.id}
-                            gridColumn="span 4"
-                            gridRow="span 1"
-                            backgroundColor={colors.primary[400]}
+                                gridColumn="span 4"
+                                gridRow="span 1"
+                                backgroundColor={colors.primary[400]}
                             >
-                                <PremiumCard plan={plan}/>
-                                </Box>; 
+                                <Suspense
+                                    loading={loading}
+                                    data={plans}
+                                    error={error}
+                                    onRetry={() => getPlans}
+                                    type={'card'}
+                                >
+                                    <PremiumCard plan={plan}/>
+                                </Suspense>
+                            </Box>; 
                         }
                     )
                 }

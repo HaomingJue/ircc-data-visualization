@@ -39,7 +39,7 @@ const Topbar = ({showLightButton = true,
                 }
                 {showProfileButton && 
                 <Box display="flex"> 
-                    <IconButton onClick={colorMode.toggleColorMode}>
+                    <IconButton onClick={() => navigate("/home/profile")}>
                         <PersonOutlinedIcon/>
                     </IconButton>
                 </Box>

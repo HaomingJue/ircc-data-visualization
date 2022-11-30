@@ -11,6 +11,7 @@ import Header from "../../../components/GridHeader";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
+import Suspense from '../../../components/LoadingSkeleton';
 
 const DataFormPage = () => {
   const theme = useTheme();
@@ -18,7 +19,8 @@ const DataFormPage = () => {
 
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   let navigate = useNavigate();
   
@@ -32,13 +34,13 @@ const DataFormPage = () => {
 
   const getImmigrationColumn = () => {
     let request = new HttpRequest('Get', "/datasource/immigration/*");
-    handleRequest(request).then((data) => columnConstruct(data.data)).catch((err) => alert(err));
+    setLoading(true)
+    handleRequest(request).then((data) => columnConstruct(data.data)).catch((err) => {setLoading(false); alert(err); setError(err)});
   }
 
   let columnMap = new Map();
   columnMap["source"] = "source country"
   columnMap["address"] = "destination"
-
 
   const columnConstruct = (data) => {
     const columns = [];
@@ -54,10 +56,9 @@ const DataFormPage = () => {
       return a['id'] - b['id'];
     })
     setColumns(columns);
-    setRows(data)
+    setRows(data);
+    setLoading(false);
   }
-
-
 
   return (
     <Box m="20px">
@@ -109,7 +110,15 @@ const DataFormPage = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={rows} columns={columns} />
+        <Suspense
+          loading={loading}
+          data={rows}
+          error={error}
+          onRetry={() => getImmigrationColumn}
+          type={'table'}
+        >
+          <DataGrid checkboxSelection rows={rows} columns={columns} />
+        </Suspense>
       </Box>
     </Box>
   );
