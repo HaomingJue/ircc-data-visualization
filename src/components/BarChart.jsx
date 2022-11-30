@@ -99,7 +99,6 @@ const BarChart = ({ isDashboard = false }) => {
         indexScale={{ type: "band", round: true }}
         colors={{ scheme: "nivo" }}
         tooltip={(props) => {
-          console.log(props)
           return (
             <Box color={"#040509"}>
               <BasicTooltip
