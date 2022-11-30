@@ -81,7 +81,7 @@ const BarChart = ({ isDashboard = false }) => {
             "quebec_skilled_worker",
             "federal_skilled_worker"]}
       indexBy="province"
-      margin={{ top: 50, right: 200, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 200, bottom: 50, left: 110 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
@@ -138,7 +138,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickRotation: 0,
         legend: isDashboard ? undefined : "food", // changed
         legendPosition: "middle",
-        legendOffset: -40,
+        legendOffset: -80,
       }}
       enableLabel={false}
       labelSkipWidth={12}

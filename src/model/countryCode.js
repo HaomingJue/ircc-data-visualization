@@ -20,5 +20,8 @@ export const countryCode = {
     'Brazil' : 'BRA',
     'Colombia' : 'COL',
     'Mexico' : 'MEX',
-    'Germany' : 'DEU'    
+    'Germany' : 'DEU',
+    'United States': 'USA',
+    'Australia': 'AUS',
+    'Russia': 'RUS'    
 }

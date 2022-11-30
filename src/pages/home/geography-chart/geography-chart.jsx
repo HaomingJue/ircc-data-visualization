@@ -8,7 +8,7 @@ const GeographyChartPage = () => {
   const colors = tokens(theme.palette.mode);
   return (
     <Box m="20px">
-      <Header title="Geography" subtitle="Simple Geography Chart" />
+      <Header title="Immigration Source" subtitle="Where do Canadian Immigrants come from?" />
 
       <Box
         height="75vh"

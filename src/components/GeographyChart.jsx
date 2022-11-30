@@ -4,13 +4,50 @@ import { geoFeatures } from "../mockData/mockGeoFeatures";
 import { tokens } from "../common/theme";
 import { mockGeographyData as data } from "../mockData/mockData";
 import { BasicTooltip } from '@nivo/tooltip';
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { checkLoginStatus } from "../service/checkLoginStatus";
+import { handleRequest, HttpRequest } from "../model/http_request";
+import { countryCode } from "../model/countryCode";
 
 const GeographyChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  let navigate = useNavigate()
+
+  useEffect( () => {
+    if (!checkLoginStatus()) {
+      navigate("/login");
+    }
+    getCountryData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[navigate])
+
+
+  const [countryData, setCountryData] = useState([])
+
+  const getCountryData = () => {
+    let request = new HttpRequest('Get', "/datasource/country/*");
+    handleRequest(request).then((data) => constructData(data.data)).catch((err) => alert(err));
+  }
+
+  const constructData = (data) => {
+    var countryDataList = []
+
+    for (var i = 0; i < data.length; i++) {
+      var pair = {}
+      pair["id"] = countryCode[data[i]["name"]]
+      pair["value"] = data[i]["total"];
+      countryDataList.push(pair)
+    }
+    setCountryData(countryDataList)
+  }
+  console.log(data)
+
   return (
     <ResponsiveChoropleth
-      data={data}
+      data={countryData}
       theme={{
         axis: {
           domain: {
@@ -41,7 +78,7 @@ const GeographyChart = ({ isDashboard = false }) => {
       }}
       features={geoFeatures.features}
       margin={isDashboard? { top: 0, right: 0, bottom: 0, left: 0 } : { top: 80, right: 0, bottom: 0, left: 0 }}
-      domain={[0, 1000000]}
+      domain={[0, 70000]}
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
