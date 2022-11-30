@@ -46,7 +46,7 @@ const PremiumPage = () => {
             gap="100px"
             >
                 {
-                    plans.map(
+                    premiumPlan.map(
                         (plan) => {
                             return <Box key={plan.id}
                                 gridColumn="span 4"

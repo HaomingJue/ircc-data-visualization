@@ -55,7 +55,7 @@ export default function PremiumCard(props) {
                     <CardMedia
                     component="img"
                     height={"375px"}
-                    image={plan.plan_image}
+                    image={plan.image}
                     alt="not found"
                     />
                     <CardContent>
