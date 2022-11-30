@@ -55,7 +55,7 @@ export default function PremiumCard(props) {
                     <CardMedia
                     component="img"
                     height={"375px"}
-                    image={plan.image}
+                    image={plan.plan_image}
                     alt="not found"
                     />
                     <CardContent>
@@ -66,7 +66,7 @@ export default function PremiumCard(props) {
                         {plan.plan_price}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {plan.description}
+                        {plan.plan_description}
                     </Typography>
                     </CardContent>
                     <CardActions sx={{justifyContent:"center"}}>

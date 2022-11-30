@@ -21,6 +21,7 @@ import Header from "../../../components/GridHeader";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
+import Suspense from '../../../components/LoadingSkeleton';
 
 const ManageUserPage = () => {
   const theme = useTheme();
@@ -32,6 +33,8 @@ const ManageUserPage = () => {
   const [iconId, setIconId] = useState("icon-1.png");
   const [gender, setGender] = useState("Male");
   const [isStaff, setIsStaff] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   let navigate = useNavigate();
   
@@ -45,7 +48,8 @@ const ManageUserPage = () => {
 
   const getUserColumn = () => {
     let request = new HttpRequest('Get', `/login/update/*`);
-    handleRequest(request).then((a) => columnAndRowConstruct(a.data)).catch((err) => alert(err));
+    setLoading(true);
+    handleRequest(request).then((a) => columnAndRowConstruct(a.data)).catch((err) => {setLoading(false); alert(err); setError(err)});
   }
 
   const columnAndRowConstruct = (datas) => {
@@ -60,6 +64,7 @@ const ManageUserPage = () => {
     }
     setColumns(columns);
     setRows(datas);
+    setLoading(false);
   }
 
   const handleUpdate = (result) => {
@@ -68,7 +73,7 @@ const ManageUserPage = () => {
       alert("Create User Succesfully")
       getUserColumn();
     } else {
-      alert('Create Error\n' + result.message + '\n' + result.request.response);
+      setError('Create Error\n' + result.message + '\n' + result.request.response);
     }
   }
 
@@ -158,7 +163,15 @@ const handleSubmit = (event) => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={rows} columns={columns} />
+        <Suspense
+          loading={loading}
+          data={rows}
+          error={error}
+          onRetry={() => getUserColumn}
+          type={'table'}
+        >
+          <DataGrid checkboxSelection rows={rows} columns={columns} />
+        </Suspense>
       </Box>
       <Dialog 
         open={showModal} 

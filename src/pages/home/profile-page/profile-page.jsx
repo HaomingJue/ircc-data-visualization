@@ -171,7 +171,7 @@ const ProgfilePage = () => {
                                         <Cake />
                                     </ListItemIcon>
                                     <ListItemText sx={{maxWidth: '30%', color: colors.blueAccent[500]}} primary="Email: " />
-                                    <ListItemText sx={{justifyContent: 'center'}} primary={user?.email} />
+                                    <ListItemText sx={{justifyContent: 'center'}} primary={user.userEmail} />
                                 </ListItem>
                                 <ListItem>
                                     <ListItemIcon>

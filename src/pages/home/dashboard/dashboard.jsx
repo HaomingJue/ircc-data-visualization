@@ -77,7 +77,7 @@ const DashboardPage = () => {
               </Typography>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
+          <Box height="250px" m="-20px 0 0 0" display={"flex"}>
             <LineChart isDashboard={true} />
           </Box>
         </Box>
