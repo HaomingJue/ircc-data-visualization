@@ -59,6 +59,7 @@ function RegisterPage() {
         var phoneNumber = data.get('phone_number')
         var firstName = data.get("first_name");
         var lastName = data.get("last_name");
+        var email = data.get("email")
         var gender = data.get("gender")
         if (password !== repeatPassword) {
           alert('Password does not match!')
@@ -71,6 +72,7 @@ function RegisterPage() {
           registerRequest["user_address"] = address;
           registerRequest["user_phone"] = phoneNumber;
           registerRequest["user_postcode"] = postalCode;
+          registerRequest["email"] = email;
           registerRequest["user_icon"] = icon;
           registerRequest["first_name"] = firstName;
           registerRequest["last_name"] = lastName;
@@ -216,6 +218,14 @@ function RegisterPage() {
                   </FormControl>
                 </Grid>
             </Grid>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="email"
+              label="email"
+              id="email"
+            />
             <TextField
               margin="normal"
               required
