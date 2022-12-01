@@ -19,12 +19,12 @@ import { useNavigate } from 'react-router-dom';
 import { checkLoginStatus } from '../../service/checkLoginStatus';
 import { useEffect } from 'react';
 import { HttpRequest, handleRequest } from '../../model/http_request';
-
-
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function RegisterPage() {
   const theme = useTheme();
-
+  const [isVerified, setIsVerified] = React.useState(false);
+  const SITE_KEY = "6LdNq0sjAAAAACkmMORtXORTarlg_CBv0Y2OErE6";
 
   let navigate = useNavigate(); 
   // default check valid token
@@ -62,8 +62,9 @@ function RegisterPage() {
         var gender = data.get("gender")
         if (password !== repeatPassword) {
           alert('Password does not match!')
-        }
-        else {
+        } else if (!isVerified) {
+          alert("Please complete verification first!")
+        } else {
           let registerRequest = {};
           registerRequest["username"] = username;
           registerRequest["password"] = password;
@@ -251,11 +252,20 @@ function RegisterPage() {
                     />
                 </Grid>
             </Grid>
+            <Box sx={{ mt: 2, width: '100%'}}>
+              <ReCAPTCHA 
+                sx={{width: '400'}}
+                sitekey={SITE_KEY}
+                onChange={() => {setIsVerified(true)}} 
+                onExpired={() => {setIsVerified(false)}}
+              />
+            </Box>
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              disabled={!isVerified}
               sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
             >
               Sign UP

@@ -2,8 +2,6 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -22,11 +20,14 @@ import { useTheme } from '@emotion/react';
 import { useEffect } from 'react';
 import {  setLocal } from '../../service/localStorage';
 import { checkLoginStatus } from '../../service/checkLoginStatus';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export function LoginPage() {
   
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isVerified, setIsVerified] = React.useState(false);
+  const SITE_KEY = "6LdNq0sjAAAAACkmMORtXORTarlg_CBv0Y2OErE6";
 
   let navigate = useNavigate(); 
   // default check valid token
@@ -56,8 +57,12 @@ export function LoginPage() {
     let loginRequest = {};
     loginRequest["username"] = data.get('username');
     loginRequest["password"] = data.get('password');
-    let request = new HttpRequest('Post', '/login/', loginRequest);
-    handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
+    if (!isVerified) {
+      alert("Please complete verification first!")
+    } else {
+      let request = new HttpRequest('Post', '/login/', loginRequest);
+      handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
+    }
   };
 
   return (
@@ -99,14 +104,18 @@ export function LoginPage() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+            <Box sx={{ mt: 2, width: '100%'}}>
+            <ReCAPTCHA 
+              sitekey={SITE_KEY}
+              onChange={() => {setIsVerified(true)}} 
+              onExpired={() => {setIsVerified(false)}}
             />
+            </Box>
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              disabled={!isVerified}
               sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
             >
               Sign In
