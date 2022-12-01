@@ -124,7 +124,7 @@ const DashboardPage = () => {
         {/* ROW 3 */}
         <Box
           gridColumn="span 8"
-          gridRow="span 6"
+          gridRow="span 5"
           marginBottom="10px"
           backgroundColor={colors.primary[400]}
           overflow="auto"
@@ -182,7 +182,7 @@ const DashboardPage = () => {
         </Box>
         <Box
           gridColumn="span 4"
-          gridRow="span 3"
+          gridRow="span 2"
           backgroundColor={colors.primary[400]}
           // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
@@ -193,7 +193,7 @@ const DashboardPage = () => {
           >
             Destination Statistics
           </Typography>
-          <Box height="370px" mt="-20px">
+          <Box height="260px" mt="-20px">
             <BarChart isDashboard={true} />
           </Box>
         </Box>
