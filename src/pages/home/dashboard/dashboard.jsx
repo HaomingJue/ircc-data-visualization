@@ -45,6 +45,10 @@ const DashboardPage = () => {
     setImmigrationData(data)
   }
 
+  const jumpToPremium = () => {
+    navigate("/home/premium")
+  }
+
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -80,7 +84,7 @@ const DashboardPage = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          sx={{opacity : isFreeUser() ? 0.3 : 1}}
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Box
             mt="25px"
@@ -108,7 +112,7 @@ const DashboardPage = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
-          sx={{opacity : isFreeUser() ? 0.3 : 1}}
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -185,7 +189,7 @@ const DashboardPage = () => {
           gridColumn="span 4"
           gridRow="span 3"
           backgroundColor={colors.primary[400]}
-          sx={{opacity : isFreeUser() ? 0.3 : 1}}
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -204,7 +208,7 @@ const DashboardPage = () => {
           backgroundColor={colors.primary[400]}
           padding="30px 30px 0px 20px"
           marginBottom="10px"
-          sx={{opacity : isFreeUser() ? 0.3 : 1}}
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
