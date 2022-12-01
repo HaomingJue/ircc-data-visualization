@@ -2,8 +2,6 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -22,14 +20,15 @@ import { useTheme } from '@emotion/react';
 import { useEffect } from 'react';
 import {  setLocal } from '../../service/localStorage';
 import { checkLoginStatus } from '../../service/checkLoginStatus';
+import Captcha from 'react-captcha-code';
 
 export function LoginPage() {
   
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [code, setCode] = React.useState();
 
   let navigate = useNavigate(); 
-  // default check valid token
 
   useEffect(() => {
     if (checkLoginStatus()) {
@@ -56,8 +55,12 @@ export function LoginPage() {
     let loginRequest = {};
     loginRequest["username"] = data.get('username');
     loginRequest["password"] = data.get('password');
-    let request = new HttpRequest('Post', '/login/', loginRequest);
-    handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
+    if (data.get('validateCode') !== code) {
+      alert("Please enter correct validate code!")
+    } else {
+      let request = new HttpRequest('Post', '/login/', loginRequest);
+      handleRequest(request).then((a) => handleLogin(a)).catch((err) => handleLogin(err));
+    }
   };
 
   return (
@@ -99,10 +102,21 @@ export function LoginPage() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px'}}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="validateCode"
+                label="Validate"
+                name="validateCode"
+                autoComplete="Validate"
+                autoFocus
+              />
+              <Box sx={{ mt: 2}} >
+                <Captcha height={56} charNum={4} onChange={(e) => {setCode(e)}} />
+              </Box>
+            </Box>
             <Button
               type="submit"
               fullWidth
@@ -111,12 +125,7 @@ export function LoginPage() {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" color={colors.primary[100]}>
-                  Forgot password?
-                </Link>
-              </Grid>
+            <Grid container sx={{justifyContent: 'center'}}>
               <Grid item>
                 <Link href="/register" variant="body2" color={colors.primary[100]}>
                   {"Don't have an account? Sign Up"}
