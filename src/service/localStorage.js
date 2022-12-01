@@ -22,7 +22,7 @@ export const updateLocal = () => {
 const updateUser = (data) => {
     const currentUser = getLocal('user');
     currentUser['firstName'] = data['user']['first_name'];
-    currentUser['lastName'] = data['user']['first_name'];
+    currentUser['lastName'] = data['user']['last_name'];
     currentUser['userEmail'] = data['user']['email'];
     currentUser['gender'] = data['user']['user_gender'];
     currentUser['address'] = data['user']['user_address'];

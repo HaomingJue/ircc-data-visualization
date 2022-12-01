@@ -32,7 +32,6 @@ const DashboardPage = () => {
   // const [error, setError] = useState();
 
   const getImmigrationColumn = () => {
-    console.log("123456")
     let request = new HttpRequest('Get', "/datasource/immigration/free");
     // setLoading(true);
   handleRequest(request).then((data) => constructData(data.data)).catch((err) => {/*setLoading(false);*/ alert(err); /*setError(err)*/});
