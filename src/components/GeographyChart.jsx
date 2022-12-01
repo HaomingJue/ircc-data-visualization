@@ -2,7 +2,6 @@ import { Box, useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { geoFeatures } from "../mockData/mockGeoFeatures";
 import { tokens } from "../common/theme";
-import { mockGeographyData as data } from "../mockData/mockData";
 import { BasicTooltip } from '@nivo/tooltip';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -43,8 +42,7 @@ const GeographyChart = ({ isDashboard = false }) => {
     }
     setCountryData(countryDataList)
   }
-  console.log(data)
-
+  
   return (
     <ResponsiveChoropleth
       data={countryData}
@@ -77,12 +75,12 @@ const GeographyChart = ({ isDashboard = false }) => {
         },
       }}
       features={geoFeatures.features}
-      margin={isDashboard? { top: 0, right: 0, bottom: 0, left: 0 } : { top: 80, right: 0, bottom: 0, left: 0 }}
+      margin={isDashboard? { top: 50, right: 0, bottom: 0, left: 0 } : { top: 80, right: 0, bottom: 0, left: 0 }}
       domain={[0, 70000]}
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
-      projectionScale={isDashboard ? 40 : 250}
+      projectionScale={isDashboard ? 80 : 250}
       projectionTranslation={isDashboard ? [0.49, 0.6] : [0.45, 0.5]}
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}

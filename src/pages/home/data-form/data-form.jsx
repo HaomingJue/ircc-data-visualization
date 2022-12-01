@@ -12,6 +12,7 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
 import Suspense from '../../../components/LoadingSkeleton';
+import { isFreeUser } from '../../../service/checkUserRole';
 
 const DataFormPage = () => {
   const theme = useTheme();
@@ -27,6 +28,9 @@ const DataFormPage = () => {
   useEffect( () => {
     if (!checkLoginStatus()) {
       navigate("/login");
+    }
+    if (isFreeUser()) {
+      navigate("/home/premium")
     }
     getImmigrationColumn();
   // eslint-disable-next-line react-hooks/exhaustive-deps

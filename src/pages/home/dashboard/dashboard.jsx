@@ -1,15 +1,15 @@
 import { Box, Button,  Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../common/theme";
-import { mockTransactions } from "../../../mockData/mockData";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../../components/GridHeader";
 import LineChart from "../../../components/LineChart";
 import GeographyChart from "../../../components/GeographyChart";
 import BarChart from "../../../components/BarChart";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../../../components/PieChart";
+import { handleRequest, HttpRequest } from "../../../model/http_request";
 
 const DashboardPage = () => {
   
@@ -19,10 +19,34 @@ const DashboardPage = () => {
     if (!checkLoginStatus()) {
       navigate("/login");
     }
+    getImmigrationColumn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[navigate])
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
+  const [immigrationData, setImmigrationData] = useState([])
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState();
+
+  const getImmigrationColumn = () => {
+    console.log("123456")
+    let request = new HttpRequest('Get', "/datasource/immigration/free");
+    // setLoading(true);
+  handleRequest(request).then((data) => constructData(data.data)).catch((err) => {/*setLoading(false);*/ alert(err); /*setError(err)*/});
+  }
+  let dataKeyMap = ["year", "gender", "age", "category", "source", "address", "status"]
+
+
+  const constructData = (data) => {
+    setImmigrationData(data)
+  }
+
+  const jumpToPremium = () => {
+    navigate("/home/premium")
+  }
 
   return (
     <Box m="20px">
@@ -59,6 +83,7 @@ const DashboardPage = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Box
             mt="25px"
@@ -86,6 +111,7 @@ const DashboardPage = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -102,7 +128,7 @@ const DashboardPage = () => {
         {/* ROW 3 */}
         <Box
           gridColumn="span 8"
-          gridRow="span 4"
+          gridRow="span 6"
           marginBottom="10px"
           backgroundColor={colors.primary[400]}
           overflow="auto"
@@ -116,45 +142,53 @@ const DashboardPage = () => {
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
+              Immigration Records
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {immigrationData.map((oneRow) => (
             <Box
-              key={`${transaction.txId}-${i}`}
+              key={immigrationData["id"]}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               borderBottom={`4px solid ${colors.primary[500]}`}
               p="15px"
             >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
+              {
+                dataKeyMap.map((key) => {
+                return <Box width={() => {
+                    if (key === "category") {
+                      return "230px"
+                    }
+                    else if (key === "status") {
+                      return "200px"
+                    }
+                    else{
+                      return "100px"
+                    }
+                  }}>
+                  <Typography
+                    color={colors.greenAccent[500]}
+                    variant="h5"
+                    fontWeight="600"
+                  >
+                    {key}
+                    {/* {key === "year" ? oneRow["status"] : " "} */}
+                  </Typography>
+                  <Typography color={colors.grey[100]}>
+                    {oneRow[key]}
+                  </Typography>
+                </Box>
+                } )
+              }
             </Box>
           ))}
         </Box>
         <Box
           gridColumn="span 4"
-          gridRow="span 2"
+          gridRow="span 3"
           backgroundColor={colors.primary[400]}
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -163,16 +197,17 @@ const DashboardPage = () => {
           >
             Destination Statistics
           </Typography>
-          <Box height="250px" mt="-20px">
+          <Box height="370px" mt="-20px">
             <BarChart isDashboard={true} />
           </Box>
         </Box>
         <Box
           gridColumn="span 4"
-          gridRow="span 2"
+          gridRow="span 3"
           backgroundColor={colors.primary[400]}
           padding="30px 30px 0px 20px"
           marginBottom="10px"
+          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -181,7 +216,7 @@ const DashboardPage = () => {
           >
             Immigration Source
           </Typography>
-          <Box height="200px">
+          <Box height="350px">
             <GeographyChart isDashboard={true} />
           </Box>
         </Box>
