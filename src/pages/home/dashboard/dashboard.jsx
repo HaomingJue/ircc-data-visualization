@@ -10,6 +10,7 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../../../components/PieChart";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
+import { isFreeUser } from "../../../service/checkUserRole";
 
 const DashboardPage = () => {
   
@@ -79,6 +80,7 @@ const DashboardPage = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Box
             mt="25px"
@@ -106,6 +108,7 @@ const DashboardPage = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
+          sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -136,7 +139,7 @@ const DashboardPage = () => {
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Immigration Records (Go to premium records form to see more to see more)
+              Immigration Records
             </Typography>
           </Box>
           {immigrationData.map((oneRow) => (
@@ -182,6 +185,7 @@ const DashboardPage = () => {
           gridColumn="span 4"
           gridRow="span 3"
           backgroundColor={colors.primary[400]}
+          sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -200,6 +204,7 @@ const DashboardPage = () => {
           backgroundColor={colors.primary[400]}
           padding="30px 30px 0px 20px"
           marginBottom="10px"
+          sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
