@@ -44,10 +44,6 @@ const DashboardPage = () => {
     setImmigrationData(data)
   }
 
-  const jumpToPremium = () => {
-    navigate("/home/premium")
-  }
-
   return (
     <Box m="20px">
       {/* HEADER */}
