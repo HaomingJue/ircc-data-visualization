@@ -19,12 +19,11 @@ import { useNavigate } from 'react-router-dom';
 import { checkLoginStatus } from '../../service/checkLoginStatus';
 import { useEffect } from 'react';
 import { HttpRequest, handleRequest } from '../../model/http_request';
-
-
+import Captcha from 'react-captcha-code';
 
 function RegisterPage() {
   const theme = useTheme();
-
+  const [code, setCode] = React.useState();
 
   let navigate = useNavigate(); 
   // default check valid token
@@ -62,8 +61,9 @@ function RegisterPage() {
         var gender = data.get("gender")
         if (password !== repeatPassword) {
           alert('Password does not match!')
-        }
-        else {
+        } else if (data.get('validateCode') !== code) {
+          alert("Please enter correct validate code!")
+        } else {
           let registerRequest = {};
           registerRequest["username"] = username;
           registerRequest["password"] = password;
@@ -97,7 +97,6 @@ function RegisterPage() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-
         <Box
           sx={{
             marginTop: 8,
@@ -121,149 +120,161 @@ function RegisterPage() {
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
           </Box>
-
-        
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
           <Grid container columnSpacing={2}>
-                <Grid item xs={8}>
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="username"
-                    label="username"
-                    name="username"
-                    autoComplete="username"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <FormControl sx={{ marginTop: 2, minWidth: 120 }} required>
-                      <InputLabel id="demo-simple-select-helper-label">Icon</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        value={iconId}
-                        label="IconId"
-                        name="IconId"
-                        onChange={handleIconChange}
-                      >
-                        <MenuItem value={'icon-1'}>icon-1</MenuItem>
-                        <MenuItem value={'icon-2'}>icon-2</MenuItem>
-                        <MenuItem value={'icon-3'}>icon-3</MenuItem>
-                        <MenuItem value={'elon-musk'}>elon musk</MenuItem>
-                      </Select>
-                  </FormControl>
-                </Grid>
+            <Grid item xs={8}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
             </Grid>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="password"
-              type="password"
-              id="password"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="repeat_password"
-              label="repeat password"
-              type="password"
-              id="repeat_password"
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              name="first_name"
-              label="First Name"
-              id="first_name"
-            />
+            <Grid item xs={4}>
+              <FormControl sx={{ marginTop: 2, minWidth: 120 }} required>
+                  <InputLabel id="demo-simple-select-helper-label">Icon</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={iconId}
+                    label="IconId"
+                    name="IconId"
+                    onChange={handleIconChange}
+                  >
+                    <MenuItem value={'icon-1'}>icon-1</MenuItem>
+                    <MenuItem value={'icon-2'}>icon-2</MenuItem>
+                    <MenuItem value={'icon-3'}>icon-3</MenuItem>
+                    <MenuItem value={'elon-musk'}>elon musk</MenuItem>
+                  </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="password"
+            type="password"
+            id="password"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="repeat_password"
+            label="repeat password"
+            type="password"
+            id="repeat_password"
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            name="first_name"
+            label="First Name"
+            id="first_name"
+          />
           <Grid container columnSpacing={2}>
-                <Grid item xs={8}>
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="last_name"
-                    label="Last Name"
-                    name="last_name"
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <FormControl sx={{ marginTop: 2, minWidth: 120 }} required>
-                      <InputLabel id="gender">Gender</InputLabel>
-                      <Select
-                        id="demo-simple-select-helper"
-                        value={gender}
-                        label="Gender"
-                        name="gender"
-                        onChange={handleGenderChange}
-                      >
-                        <MenuItem value={'Male'}>Male</MenuItem>
-                        <MenuItem value={'Female'}>Female</MenuItem>
-                        <MenuItem value={'Anatomical'}>Anatomical</MenuItem>
-                        <MenuItem value={'Cisgender'}>Cisgender</MenuItem>
-                        <MenuItem value={'Transgender'}>Transgender</MenuItem>
-                        <MenuItem value={'Cishet'}>Cishet</MenuItem>
-                        <MenuItem value={'Non-binary'}>Non-binary</MenuItem>
-                        <MenuItem value={'Genderqueer'}>Genderqueer</MenuItem>
-                      </Select>
-                  </FormControl>
-                </Grid>
+            <Grid item xs={8}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="last_name"
+                label="Last Name"
+                name="last_name"
+              />
             </Grid>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address_1"
-              label="address"
-              id="address_1"
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              name="address_2"
-              label="address (line 2)"
-              id="address_2"
-            />
-            <Grid container columnSpacing={2}>
-                <Grid item xs={4}>
-                    <TextField
-                        margin="normal"
-                        required
-                        name="postal_code"
-                        label="postal code"
-                        id="postal_code"
-                    />
-                </Grid>
-                <Grid item xs={8}>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="phone_number"
-                        label="phone number"
-                        id="phone_number"
-                    />
-                </Grid>
+            <Grid item xs={4}>
+              <FormControl sx={{ marginTop: 2, minWidth: 120 }} required>
+                <InputLabel id="gender">Gender</InputLabel>
+                <Select
+                  id="demo-simple-select-helper"
+                  value={gender}
+                  label="Gender"
+                  name="gender"
+                  onChange={handleGenderChange}
+                >
+                  <MenuItem value={'Male'}>Male</MenuItem>
+                  <MenuItem value={'Female'}>Female</MenuItem>
+                  <MenuItem value={'Anatomical'}>Anatomical</MenuItem>
+                  <MenuItem value={'Cisgender'}>Cisgender</MenuItem>
+                  <MenuItem value={'Transgender'}>Transgender</MenuItem>
+                  <MenuItem value={'Cishet'}>Cishet</MenuItem>
+                  <MenuItem value={'Non-binary'}>Non-binary</MenuItem>
+                  <MenuItem value={'Genderqueer'}>Genderqueer</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
+          </Grid>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="address_1"
+            label="address"
+            id="address_1"
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            name="address_2"
+            label="address (line 2)"
+            id="address_2"
+          />
+          <Grid container columnSpacing={2}>
+            <Grid item xs={4}>
+              <TextField
+                margin="normal"
+                required
+                name="postal_code"
+                label="postal code"
+                id="postal_code"
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="phone_number"
+                label="phone number"
+                id="phone_number"
+              />
+            </Grid>
+          </Grid>
+          <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px'}}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="validateCode"
+                label="Validate"
+                name="validateCode"
+                autoComplete="Validate"
+                autoFocus
+              />
+              <Box sx={{ mt: 2}} >
+                <Captcha height={56} charNum={4} onChange={(e) => {setCode(e)}} />
+              </Box>
+            </Box>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
-            >
-              Sign UP
-            </Button>
-            <Link href="/login" variant="body2" justifyContent="center">
-                  {"Back to login page"}
-            </Link>
-          </Box>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
+          >
+            Sign UP
+          </Button>
+          <Link href="/login" variant="body2" justifyContent="center">
+                {"Back to login page"}
+          </Link>
+        </Box>
         </Box>
 
         <Copyright sx={{ mt: 8, mb: 4 }} />
