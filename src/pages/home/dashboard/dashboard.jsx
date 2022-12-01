@@ -10,6 +10,8 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../../../components/PieChart";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
+import LockCard from "../../../components/LockCard";
+import { isFreeUser } from "../../../service/checkUserRole";
 
 const DashboardPage = () => {
   
@@ -28,12 +30,9 @@ const DashboardPage = () => {
 
 
   const [immigrationData, setImmigrationData] = useState([])
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState();
 
   const getImmigrationColumn = () => {
     let request = new HttpRequest('Get', "/datasource/immigration/free");
-    // setLoading(true);
   handleRequest(request).then((data) => constructData(data.data)).catch((err) => {/*setLoading(false);*/ alert(err); /*setError(err)*/});
   }
   let dataKeyMap = ["year", "gender", "age", "category", "source", "address", "status"]
@@ -60,7 +59,7 @@ const DashboardPage = () => {
             }}
           >
             <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
-            Unlock Premium
+            {isFreeUser() ? 'Unlock Premium' : 'Extended Premium'}
           </Button>
         </Box>
       </Box>
@@ -78,7 +77,6 @@ const DashboardPage = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Box
             mt="25px"
@@ -106,7 +104,6 @@ const DashboardPage = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
-          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -116,7 +113,9 @@ const DashboardPage = () => {
             Category Proportion
           </Typography>
           <Box height="250px" mt="-20px">
-            <PieChart isDashboard={true} />
+            <LockCard>
+              <PieChart isDashboard={true} />
+            </LockCard>
           </Box>
         </Box>
 
@@ -128,7 +127,7 @@ const DashboardPage = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-            <Box
+          <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
@@ -168,7 +167,6 @@ const DashboardPage = () => {
                     fontWeight="600"
                   >
                     {key}
-                    {/* {key === "year" ? oneRow["status"] : " "} */}
                   </Typography>
                   <Typography color={colors.grey[100]}>
                     {oneRow[key]}
@@ -183,7 +181,6 @@ const DashboardPage = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -202,7 +199,6 @@ const DashboardPage = () => {
           backgroundColor={colors.primary[400]}
           padding="30px 30px 0px 20px"
           marginBottom="10px"
-          // sx={{opacity : isFreeUser() ? 0.3 : 1}}
         >
           <Typography
             variant="h5"
@@ -212,7 +208,9 @@ const DashboardPage = () => {
             Immigration Source
           </Typography>
           <Box height="350px">
-            <GeographyChart isDashboard={true} />
+            <LockCard>
+              <GeographyChart isDashboard={true} />
+            </LockCard>
           </Box>
         </Box>
       </Box>

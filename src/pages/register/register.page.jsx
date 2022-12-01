@@ -19,12 +19,12 @@ import { useNavigate } from 'react-router-dom';
 import { checkLoginStatus } from '../../service/checkLoginStatus';
 import { useEffect } from 'react';
 import { HttpRequest, handleRequest } from '../../model/http_request';
-
-
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function RegisterPage() {
   const theme = useTheme();
-
+  const [isVerified, setIsVerified] = React.useState(false);
+  const SITE_KEY = "6LdNq0sjAAAAACkmMORtXORTarlg_CBv0Y2OErE6";
 
   let navigate = useNavigate(); 
   // default check valid token
@@ -59,17 +59,20 @@ function RegisterPage() {
         var phoneNumber = data.get('phone_number')
         var firstName = data.get("first_name");
         var lastName = data.get("last_name");
+        var email = data.get("email")
         var gender = data.get("gender")
         if (password !== repeatPassword) {
           alert('Password does not match!')
-        }
-        else {
+        } else if (!isVerified) {
+          alert("Please complete verification first!")
+        } else {
           let registerRequest = {};
           registerRequest["username"] = username;
           registerRequest["password"] = password;
           registerRequest["user_address"] = address;
           registerRequest["user_phone"] = phoneNumber;
           registerRequest["user_postcode"] = postalCode;
+          registerRequest["email"] = email;
           registerRequest["user_icon"] = icon;
           registerRequest["first_name"] = firstName;
           registerRequest["last_name"] = lastName;
@@ -219,6 +222,14 @@ function RegisterPage() {
               margin="normal"
               required
               fullWidth
+              name="email"
+              label="email"
+              id="email"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="address_1"
               label="address"
               id="address_1"
@@ -251,11 +262,20 @@ function RegisterPage() {
                     />
                 </Grid>
             </Grid>
+            <Box sx={{ mt: 2, width: '100%'}}>
+              <ReCAPTCHA 
+                sx={{width: '400'}}
+                sitekey={SITE_KEY}
+                onChange={() => {setIsVerified(true)}} 
+                onExpired={() => {setIsVerified(false)}}
+              />
+            </Box>
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              disabled={!isVerified}
               sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
             >
               Sign UP
