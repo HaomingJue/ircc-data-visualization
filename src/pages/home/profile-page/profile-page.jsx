@@ -83,7 +83,6 @@ const ProgfilePage = () => {
           alert("Update Succesfully")
           setUser(updateLocal())
         } else {
-          // show modal;
           alert('Update Error\n' + result.message + '\n' + result.request.response);
         }
       }
