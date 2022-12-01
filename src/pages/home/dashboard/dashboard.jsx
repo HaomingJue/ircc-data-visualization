@@ -10,7 +10,6 @@ import { checkLoginStatus } from "../../../service/checkLoginStatus";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../../../components/PieChart";
 import { handleRequest, HttpRequest } from "../../../model/http_request";
-import { isFreeUser } from "../../../service/checkUserRole";
 
 const DashboardPage = () => {
   
