@@ -20,6 +20,7 @@ import { checkLoginStatus } from '../../service/checkLoginStatus';
 import { useEffect } from 'react';
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Topbar from '../../common/Topbar';
 
 function RegisterPage() {
   const theme = useTheme();
@@ -33,7 +34,7 @@ function RegisterPage() {
     if (checkLoginStatus()) {
       navigate("/home/dashboard");
     }
-  }, [navigate]);
+  }, [navigate, theme.palette.mode]);
 
 
   const handleRegister = (result) => {
@@ -99,6 +100,7 @@ function RegisterPage() {
 
   return (
     <ThemeProvider theme={theme}>
+            <Topbar showProfileButton={false} showLogoutButton={false}/>
       <Container component="main" maxWidth="xs">
 
         <Box

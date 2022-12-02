@@ -62,7 +62,7 @@ const ProgfilePage = () => {
         if (subscriptionStatus) {
             return <>
                 <Typography sx={{ mb: 1.5 }} color={colors.redAccent[500]}>Premium User</Typography>
-                <LinearProgress variant="determinate" value={60} />
+                <LinearProgress variant="determinate" value={getProgressValue()} color='secondary'/>
                 <Typography sx={{ mt: 1.5, mb: -1.5, fontSize: 'bold' }} variant="body2">
                     {`Your Plan will be expired at: ${dateFormat(user?.expireDate, 'yyyy-mm-dd')}`}
                 </Typography>
@@ -113,6 +113,10 @@ const ProgfilePage = () => {
     const handleIconChange = (e) => {
         setIconId(e.target.value);
     };
+
+    const getProgressValue = () => {
+        return 60
+    }
 
     return (
         <>
