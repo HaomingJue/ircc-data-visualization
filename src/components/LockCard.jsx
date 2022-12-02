@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Button } from "@mui/material";
 import { isFreeUser } from '../service/checkUserRole';
 import { useNavigate } from "react-router-dom";
+import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 
 const LockCard = (props) => {
 
     let navigate = useNavigate();
     const {children} = props;
-    console.log(props)
     return (
         <Box style={{width: '100%', height: '100%'}} sx={{position: 'relative'}}>
             {isFreeUser() && <Box display={'flex'} justifyContent='center' alignItems={'center'} style={{width: '100%', height: '100%'}} sx={{position: 'absolute', zIndex: 2}}>
@@ -16,6 +16,7 @@ const LockCard = (props) => {
                     sx={{ mt: 3, mb: 2, backgroundColor: '#3da58a', ':hover': {bgcolor:'green'}}}
                     onClick={() => {navigate("/home/premium")}}
                 >
+                    <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
                     Unlock
                 </Button>
             </Box>}
