@@ -61,16 +61,23 @@ const ProgfilePage = () => {
     const userStatusContent = (subscriptionStatus) => {
         if (subscriptionStatus) {
             return <>
-                <Typography sx={{ mb: 1.5 }} color={colors.redAccent[500]}>Premium User</Typography>
-                <LinearProgress variant="determinate" value={getProgressValue()} color='secondary'/>
-                <Typography sx={{ mt: 1.5, mb: -1.5, fontSize: 'bold' }} variant="body2">
+                <Typography variant="h5" sx={{ mb: 1.5 }} color={colors.redAccent[500]}>Premium User</Typography>
+                <LinearProgress variant="determinate" value={60} />
+                <Typography sx={{ mt: 1.5, mb: -1.5, fontSize: 'bold' }} variant="h7">
                     {`Your Plan will be expired at: ${dateFormat(user?.expireDate, 'yyyy-mm-dd')}`}
+                </Typography>
+            </>
+        } else if (user.role) {
+            return <>
+                <Typography variant="h5" sx={{ mb: 1.5 }} color="text.secondary">Admin</Typography>
+                <Typography variant="h7">
+                    "You are the king of the System!"
                 </Typography>
             </>
         } else {
             return <>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">Free User</Typography>
-                <Typography variant="body2">
+                <Typography variant="h5" sx={{ mb: 1.5 }} color="text.secondary">Free User</Typography>
+                <Typography variant="h7">
                     "Upgrade your plan to access all the functions!"
                 </Typography>
             </>

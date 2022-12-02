@@ -29,15 +29,12 @@ const DataFormPage = () => {
     if (!checkLoginStatus()) {
       navigate("/login");
     }
-    if (isFreeUser()) {
-      navigate("/home/premium")
-    }
     getImmigrationColumn();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[navigate])
 
   const getImmigrationColumn = () => {
-    let request = new HttpRequest('Get', "/datasource/immigration/*");
+    let request = new HttpRequest('Get', isFreeUser() ? "/datasource/immigration/free" : "/datasource/immigration/*");
     setLoading(true)
     handleRequest(request).then((data) => columnConstruct(data.data)).catch((err) => {setLoading(false); alert(err); setError(err)});
   }
@@ -68,19 +65,20 @@ const DataFormPage = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Immigration Data Records" subtitle="Check IRCC's public immigration records" />
-        <Button
+        {isFreeUser() && <Button
           sx={{
             backgroundColor: colors.blueAccent[700],
             color: colors.grey[100],
             fontSize: "14px",
             fontWeight: "bold",
             padding: "10px 20px",
+            ':hover': {bgcolor: colors.blueAccent[600]}
           }}
           onClick={() => {navigate("/home/premium")}}
         >
           <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
-          Extend Premium
-        </Button>
+          Access All Records
+        </Button>}
       </Box>
 
       <Box
