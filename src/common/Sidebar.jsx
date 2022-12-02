@@ -18,21 +18,23 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
 import { getLocal } from "../service/localStorage";
 import dateFormat from 'dateformat';
+import { isFreeUser } from "../service/checkUserRole";
+import { useLocation } from 'react-router-dom';
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, isDisabled = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  let location = useLocation();
   return (
     <MenuItem
-      active={selected === title}
+      active={!isDisabled && location.pathname === to}
       style={{
-        color: colors.grey[100],
+        color: !isDisabled && colors.grey[100],
       }}
-      onClick={() => setSelected(title)}
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
+      {!isDisabled && <Link to={to} />}
     </MenuItem>
   );
 };
@@ -55,17 +57,13 @@ const Sidebar = () => {
     }
   }
 
-  // to be finished
-
   const getUserIconImage = () => {
     return "/user-icons/" + user.icon
   }
 
-
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box 
@@ -107,7 +105,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h5" color={colors.grey[100]}>
-                Home
+                  Home
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -152,34 +150,28 @@ const Sidebar = () => {
               title="Dashboard"
               to="/home/dashboard"
               icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
             />
            
-                { (!isCollapsed && getUserRole() ==='Admin') && 
-                            <Typography
-                            variant="h7"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                          >
-                            Admin Space
-                          </Typography>
-                }
+              {(!isCollapsed && getUserRole() ==='Admin') && 
+                <Typography
+                  variant="h7"
+                  color={colors.grey[300]}
+                  sx={{ m: "15px 0 5px 20px" }}
+                >
+                  Admin Space
+                </Typography>
+              }
               {  getUserRole() ==='Admin' &&
                 <Box>
                 <Item
                   title="Manage User"
                   to="/home/manage-user"
                   icon={<PeopleOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
                 />
                 <Item
                   title="Manage Records"
                   to="/home/manage-data"
                   icon={<ReceiptOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
                 />
                 </Box>
               }
@@ -195,22 +187,16 @@ const Sidebar = () => {
               title="Profile"
               to="/home/profile"
               icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
             />
             <Item
               title="Premium"
               to="/home/premium"
               icon={<AddCardOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
             />
             <Item
               title="FAQ Page"
               to="/home/faq"
               icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
             />
 
             {!isCollapsed && <Typography
@@ -225,36 +211,30 @@ const Sidebar = () => {
               title="Immigration Records"
               to="/home/data-form"
               icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
             />
             <Item
               title="Destination Statistics"
               to="/home/bar-chart"
               icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              isDisabled={isFreeUser()}
             />
             <Item
               title="Category Proportion"
               to="/home/pie-chart"
               icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              isDisabled={isFreeUser()}
             />
             <Item
               title="Yearly Trends"
               to="/home/line-chart"
               icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              isDisabled={isFreeUser()}
             />
             <Item
               title="Immigration Source"
               to="/home/geography-chart"
               icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              isDisabled={isFreeUser()}
             />
           </Box>
         </Menu>

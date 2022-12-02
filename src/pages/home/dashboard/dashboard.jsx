@@ -56,10 +56,11 @@ const DashboardPage = () => {
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
+              ':hover': {bgcolor: colors.blueAccent[600]}
             }}
           >
             <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
-            {isFreeUser() ? 'Unlock Premium' : 'Extended Premium'}
+            {isFreeUser() ? 'Access All' : 'Extended Premium'}
           </Button>
         </Box>
       </Box>
@@ -190,7 +191,9 @@ const DashboardPage = () => {
             Destination Statistics
           </Typography>
           <Box height="260px" mt="-20px">
-            <BarChart isDashboard={true} />
+            <LockCard>
+              <BarChart isDashboard={true} />
+            </LockCard>
           </Box>
         </Box>
         <Box
