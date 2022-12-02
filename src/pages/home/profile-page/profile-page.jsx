@@ -121,6 +121,10 @@ const ProgfilePage = () => {
         setIconId(e.target.value);
     };
 
+    const getProgressValue = () => {
+        return 60
+    }
+
     return (
         <>
             <Grid container spacing={2}>

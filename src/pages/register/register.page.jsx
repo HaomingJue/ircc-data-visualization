@@ -20,6 +20,7 @@ import { checkLoginStatus } from '../../service/checkLoginStatus';
 import { useEffect } from 'react';
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Topbar from '../../common/Topbar';
 
 function RegisterPage() {
   const theme = useTheme();
@@ -33,13 +34,13 @@ function RegisterPage() {
     if (checkLoginStatus()) {
       navigate("/home/dashboard");
     }
-  }, [navigate]);
+  }, [navigate, theme.palette.mode]);
 
 
   const handleRegister = (result) => {
     let status = result['status'];
     if (status >= 200 && status <= 299) {
-      alert("Register Succesfully")
+      navigate("/login")
     } else {
       // show modal;
       alert("Register Error" + result.message + '\n' + result.request.response);
@@ -99,6 +100,7 @@ function RegisterPage() {
 
   return (
     <ThemeProvider theme={theme}>
+            <Topbar showProfileButton={false} showLogoutButton={false}/>
       <Container component="main" maxWidth="xs">
 
         <Box
