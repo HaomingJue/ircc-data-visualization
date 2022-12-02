@@ -7,7 +7,7 @@ function Copyright(props) {
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
           {'Copyright © '}
           <Link color="inherit" href="https://mui.com/">
-          Error Makers
+          https://github.com/HaomingJue/ircc-data-visualization.git
           </Link>{' '}
           {new Date().getFullYear()}
           {'.'}

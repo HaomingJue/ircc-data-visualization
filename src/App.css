@@ -24,6 +24,10 @@
   color: white;
 }
 
+.font-link {
+  font-family: 'Hanalei Fill', cursive;
+}
+
 .App-link {
   color: #61dafb;
 }
