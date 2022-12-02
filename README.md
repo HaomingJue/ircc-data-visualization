@@ -10,6 +10,10 @@ PROD: https://red-water-0b285e10f.2.azurestaticapps.net
 [Nivo Charts](https://nivo.rocks/) \
 [Styled Components](https://styled-components.com/) \
 [React Google Captcha](https://www.npmjs.com/package/react-google-recaptcha)
+# Website Preview
+<img src="./public/readme/login.PNG">
+<img src="./public/readme/dashboard.PNG">  
+
 # System Architecture
 <img src="./public/readme/systemarchitecture.PNG"> 
 
