@@ -40,7 +40,7 @@ function RegisterPage() {
   const handleRegister = (result) => {
     let status = result['status'];
     if (status >= 200 && status <= 299) {
-      alert("Register Succesfully")
+      navigate("/login")
     } else {
       // show modal;
       alert("Register Error" + result.message + '\n' + result.request.response);
