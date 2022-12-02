@@ -1,1 +1,1 @@
-UI Components/Css library: react-pro-sidebar, materialUI, formik, yup, Nivo Charts
+UI Components/Css library: react-pro-sidebar, materialUI, formik, yup, Nivo Charts, styled components, react google captcha
