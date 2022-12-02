@@ -7,8 +7,8 @@ PROD: https://red-water-0b285e10f.2.azurestaticapps.net
 [Material-UI](https://mui.com/) \
 [formik](https://formik.org/) \
 [YUP](https://www.npmjs.com/package/yup) \
-[Nivo Charts](https://nivo.rocks/)
-[Styled Components](https://styled-components.com/)
+[Nivo Charts](https://nivo.rocks/) \
+[Styled Components](https://styled-components.com/) \
 [React Google Captcha](https://www.npmjs.com/package/react-google-recaptcha)
 # System Architecture
 <img src="./public/readme/systemarchitecture.PNG"> 
