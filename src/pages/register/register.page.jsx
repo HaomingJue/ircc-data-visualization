@@ -21,9 +21,11 @@ import { useEffect } from 'react';
 import { HttpRequest, handleRequest } from '../../model/http_request';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Topbar from '../../common/Topbar';
+import { tokens } from '../../common/theme';
 
 function RegisterPage() {
   const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [isVerified, setIsVerified] = React.useState(false);
   const SITE_KEY = "6LdNq0sjAAAAACkmMORtXORTarlg_CBv0Y2OErE6";
 
@@ -282,7 +284,7 @@ function RegisterPage() {
             >
               Sign UP
             </Button>
-            <Link href="/login" variant="body2" justifyContent="center">
+            <Link href="/login" variant="body2" justifyContent="center" color={colors.primary[100]}>
                   {"Back to login page"}
             </Link>
           </Box>
