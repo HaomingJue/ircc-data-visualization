@@ -54,7 +54,7 @@ export default function PremiumCard(props) {
                 <CardActionArea >
                     <CardMedia
                     component="img"
-                    height={"375px"}
+                    height={"475px"}
                     image={plan.image}
                     alt="not found"
                     />
@@ -72,7 +72,7 @@ export default function PremiumCard(props) {
                     <CardActions sx={{justifyContent:"center"}}>
                         <Box display="flex" justifyContent="center" m="12px 0 12px 0">
                             <Button onClick={handleClick} color="secondary" variant="contained">
-                                Choose Plan
+                                Subscribe
                             </Button>
                         </Box>
 
