@@ -62,7 +62,7 @@ const ProgfilePage = () => {
         if (subscriptionStatus) {
             return <>
                 <Typography variant="h5" sx={{ mb: 1.5 }} color={colors.redAccent[500]}>Premium User</Typography>
-                <LinearProgress variant="determinate" value={60} />
+                <LinearProgress variant="determinate" value={60} color="secondary"/>
                 <Typography sx={{ mt: 1.5, mb: -1.5, fontSize: 'bold' }} variant="h7">
                     {`Your Plan will be expired at: ${dateFormat(user?.expireDate, 'yyyy-mm-dd')}`}
                 </Typography>
