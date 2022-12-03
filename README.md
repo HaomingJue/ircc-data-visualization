@@ -1,4 +1,4 @@
-
+**Notice: The website works perfectly on 27 inch monitor. Mobile devices are not recommended** 
 # Deployment
 PROD: https://red-water-0b285e10f.2.azurestaticapps.net
 # UI Design
