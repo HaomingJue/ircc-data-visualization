@@ -60,7 +60,7 @@ const DashboardPage = () => {
             }}
           >
             <LockOpenOutlinedIcon sx={{ mr: "10px" }} />
-            {isFreeUser() ? 'Access All' : 'Extended Premium'}
+            {isFreeUser() ? 'Access All' : 'Extend Premium'}
           </Button>
         </Box>
       </Box>
