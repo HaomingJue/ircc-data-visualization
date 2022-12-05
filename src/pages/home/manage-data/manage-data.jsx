@@ -60,9 +60,6 @@ const ManageImmigrationDataPage = () => {
         editable: true,
       });
     }
-    data.sort(function(a, b) {
-      return a['id'] - b['id'];
-    })
     setColumns(columns);
     setRows(data)
     setLoading(false);
